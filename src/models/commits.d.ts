@@ -16,7 +16,7 @@ export interface ICommitResponse {
     url: string;
     author: Author | null;
     committer: Committer | null;
-    message: string;
+    message: string;[]
     comment_count: number;
     tree: Tree | null;
   }

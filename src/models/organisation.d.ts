@@ -1,4 +1,4 @@
-export interface OrganizationSimple {
+export interface IOrganisationResponse {
     login: string;
     id: number;
     node_id: string;

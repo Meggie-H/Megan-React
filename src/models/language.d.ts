@@ -1,4 +1,4 @@
-export interface Language {
+export interface ILanguage {
     title: string;
     description: string;
     type: string;
