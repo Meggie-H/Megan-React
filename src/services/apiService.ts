@@ -1,15 +1,15 @@
-import { IMinimalRepository, OrganizationSimple, ICommitResponse } from '../models'
+import { IRepositoryResponse, IOrganisationResponse, ICommitResponse } from '../models'
 
 const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
-const baseUrl: string = `https://api.github.com/users/${username}`;
+const baseUrl: string = `https://api.github.com`;
 
 export function getRepos(): void {
-  fetch(baseUrl + '/repos')
+  fetch(baseUrl + `/users/${username}/repos`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network error');
       }
-      return response.json() as Promise<IMinimalRepository[]>;
+      return response.json() as Promise<IRepositoryResponse[]>;
     })
     .then(data => {
       console.log('Repos:', data);
@@ -19,8 +19,8 @@ export function getRepos(): void {
     });
 }
 
-export function getOrgs(): Promise<OrganizationSimple> {  
-    return fetch(baseUrl + '/orgs')
+export function getOrgs(): Promise<IOrganisationResponse> {  
+    return fetch(baseUrl + `/users/${username}/orgs`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network error');
@@ -42,7 +42,7 @@ export function getOrgs(): Promise<OrganizationSimple> {
   }
 
   export function getCommits(repo: string, owner: string): void {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/commits`)
+    fetch(baseUrl + `repos/${owner}/${repo}/commits`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network error');
