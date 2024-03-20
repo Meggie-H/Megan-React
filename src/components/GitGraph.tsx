@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { ICommit } from "../models";
 import { useMutation, useQuery } from "react-query";
 import { useQueryClient } from "@tanstack/react-query";
+import ReadMore from "./ReadMore";
 
+// I'll have a list of branches, and if its the first time that i see it, i'll add it to the list and make a new branch for it
+// If its not the first time, i'll just commit to the branch
 
-//I'll have a list of branches, and if its the first time that i see it, i'll add it to the list and make a new branch for it
-//If its not the first time, i'll just commit to the branch
+// I'll look at the amount of branches that is in the commit, if two, then i'll merge the first into the sexond until I find a better way to do it
 
-//I'll look at the amount of branches that is in the commit, if two, then i'll merge the first into the sexond until I find a better way to do it
-
-//create an animation for the git graph
+// create an animation for the git graph
 function GitGraph() {
   const { data: commitData, isLoading, isError } = useQuery({
     queryKey: [`getCommits`],
@@ -20,11 +20,6 @@ function GitGraph() {
 
   let branches: Record<string, any> = {};
 
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
-  };
   console.log('API Response:', commitData);
 
   if (isLoading) {
@@ -54,7 +49,7 @@ function GitGraph() {
     ))}
     </div>
     <div className="hidden lg:block">
-      <table className="bordered-table gap-4 w-screen">
+      <table className="bordered-table gap-4 w-screen border border-gray-300">
         <thead className="w-full">
           <tr className="border border-gray-300 column">
             <th className="border border-gray-300 ">Description</th>
@@ -67,10 +62,7 @@ function GitGraph() {
           {commitData?.map((commit) => (
             <tr key={commit.id}>
               <td className="pl-4">
-                {isExpanded ? commit.message : `${commit.message.slice(0, 50)}...`}
-                {!isExpanded && (
-                  <button onClick={toggleExpand}>Read more</button>
-                )}
+                <ReadMore>{commit.message}</ReadMore>
               </td>
               {/* <td>{commit.message}</td> */}
               <td className="text-center">{commit.date}</td>
