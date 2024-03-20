@@ -4,7 +4,7 @@ export interface ICommitResponse {
     node_id: string;
     html_url: string;
     comments_url: string;
-    commit: ICommitResCommitDataponse;
+    commit: CommitData;
     author: Author| null;
     committer: CommitterMain| null;
     parents: Parents[];
@@ -118,3 +118,14 @@ export interface ICommitResponse {
     deletions: number;
     total: number;
   }
+
+ export interface ICommit {
+  author: Author | null;
+  message: string;
+  branches: string[];
+  date: string | null;
+  type: 'initial' | 'merge' | 'commit' | 'branch';
+  id: string;
+ }
+
+ 
