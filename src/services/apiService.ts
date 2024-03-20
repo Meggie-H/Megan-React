@@ -42,7 +42,7 @@ export function getOrgs(): Promise<IOrganisationResponse> {
   }
 
 export async function getCommits(owner: string, repo: string): Promise<ICommit[]> {
-    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`);
+    const response = await fetch(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
     const commitData: ICommitResponse[] = await response.json();
   
     const allCommits: ICommit[] = commitData?.map(commitData => {
