@@ -1,4 +1,4 @@
-import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit } from '../models'
+import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse } from '../models'
 
 const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
 const baseUrl: string = `https://api.github.com/`;
@@ -74,4 +74,10 @@ export async function getCommits(owner: string, repo: string): Promise<ICommit[]
     });
   
     return allCommits;
+  }
+
+  export async function getUser(username: string): Promise<IUserSearchResponse> {
+    const response = await fetch(`${baseUrl}users/${username}`);
+    const userData = await response.json();
+    return userData;
   }
