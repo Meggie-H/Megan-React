@@ -1,6 +1,5 @@
 import { Gitgraph } from "@gitgraph/react";
 import { getCommits } from "../services/apiService";
-import { useEffect, useState } from "react";
 import { ICommit } from "../models";
 import { useMutation, useQuery } from "react-query";
 import { useQueryClient } from "@tanstack/react-query";
