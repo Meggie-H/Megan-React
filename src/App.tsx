@@ -1,4 +1,5 @@
-import Dashboard from './components/Dashboard';
+import { useEffect, useState } from 'react';
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
@@ -7,5 +8,4 @@ function App() {
     </>
   );
 }
-
-export default App;
+ export default App;

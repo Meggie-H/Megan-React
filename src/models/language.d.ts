@@ -3,6 +3,6 @@ export interface ILanguage {
     description: string;
     type: string;
     additionalProperties: {
-        type: string;
+    type: string;
     };
 }
