@@ -1,4 +1,4 @@
-import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit } from '../models'
+import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse } from '../models'
 import { octokit } from '../../environments/apiKey';
 
 const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
@@ -77,8 +77,14 @@ export async function getCommits(owner: string, repo: string): Promise<ICommit[]
   return allCommits;
 }
 
+  export async function getUserSearch(username: string): Promise<IUserSearchResponse> {
+    const response = octokit.request(`${baseUrl}users/${username}`);
+    const userData : IUserSearchResponse= (await response).data;
+    return userData;
+  }
+
   export async function getUser(username: string): Promise<IUserSearchResponse> {
-    const response = await fetch(`${baseUrl}users/${username}`);
-    const userData = await response.json();
+    const response = octokit.request(`${baseUrl}users/${username}`);
+    const userData : IUserSearchResponse= (await response).data;
     return userData;
   }
