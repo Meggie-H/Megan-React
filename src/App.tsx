@@ -4,7 +4,9 @@ import UserForm from './components/UserForm';
 function App() {
   return (
     <>
-      <UserForm/>
+      <div className='h-screen w-screen flex items-center justify-center'>
+        <UserForm/>
+      </div>
       <Dashboard />
     </>
   );
