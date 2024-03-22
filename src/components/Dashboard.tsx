@@ -4,7 +4,7 @@ const Dashboard = () => {
   return (
     <div className="bg-grey-950">
       <SelectButton />
-      <GitGraph />        
+      <GitGraph />
     </div>
   );
 };
