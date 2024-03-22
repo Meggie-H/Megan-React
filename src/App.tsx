@@ -1,13 +1,18 @@
-import Dashboard from './components/Dashboard';
-import UserForm from './components/UserForm';
+import { RouterProvider, createRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
+
+const router = createRouter({ routeTree });
+
+declare module "@tanstack/react-router" {
+  interface Router {
+    router: typeof router;
+  }
+}
 
 function App() {
   return (
     <>
-      <div className="flex h-screen w-screen items-center justify-center">
-        <UserForm />
-      </div>
-      <Dashboard />
+      <RouterProvider router={router} />
     </>
   );
 }
