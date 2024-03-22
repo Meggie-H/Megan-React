@@ -1,4 +1,5 @@
-import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse } from '../models'
+import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit } from '../models'
+import { octokit } from '../../environments/apiKey';
 
 const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
 const baseUrl: string = `https://api.github.com/`;
@@ -42,39 +43,39 @@ export function getOrgs(): Promise<IOrganisationResponse> {
   }
 
 export async function getCommits(owner: string, repo: string): Promise<ICommit[]> {
-    const response = await fetch(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
-    const commitData: ICommitResponse[] = await response.json();
-  
-    const allCommits: ICommit[] = commitData?.map(commitData => {
-      let commitType: 'initial' | 'merge' | 'commit' | 'branch';
-      switch (commitData.parents.length) {
-        case 0:
-          commitType = 'initial';
-          break;
-        case 1:
-          commitType = 'commit';
-          break;
-        case 2:
-          commitType = 'merge';
-          break;
-        default:
-          commitType = 'branch';
-          break;
-      }
+  const response = await octokit.request(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
+  const commitData: ICommitResponse[] = response.data;
 
-      const dataValue: ICommit = {
-        author: commitData.commit.author,
-        message: commitData.commit.message,
-        branches: commitData.parents.map(parent => parent.sha),
-        date: commitData.commit.author?.date ? commitData.commit.author.date.substring(0,10) : "Unknown",
-        type: commitType,
-        id: commitData.sha.substring(0, 7)
-      };
-      return dataValue;
-    });
-  
-    return allCommits;
-  }
+  const allCommits: ICommit[] = commitData?.map(commitData => {
+    let commitType: 'initial' | 'merge' | 'commit' | 'branch';
+    switch (commitData.parents.length) {
+      case 0:
+        commitType = 'initial';
+        break;
+      case 1:
+        commitType = 'commit';
+        break;
+      case 2:
+        commitType = 'merge';
+        break;
+      default:
+        commitType = 'branch';
+        break;
+    }
+
+    const dataValue: ICommit = {
+      author: commitData.commit.author,
+      message: commitData.commit.message,
+      branches: commitData.parents.map(parent => parent.sha),
+      date: commitData.commit.author?.date ? commitData.commit.author.date.substring(0,10) : "Unknown",
+      type: commitType,
+      id: commitData.sha.substring(0, 7)
+    };  
+    return dataValue;
+  });
+
+  return allCommits;
+}
 
   export async function getUser(username: string): Promise<IUserSearchResponse> {
     const response = await fetch(`${baseUrl}users/${username}`);
