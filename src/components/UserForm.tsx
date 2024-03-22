@@ -29,7 +29,7 @@ const UserForm = () => {
       </div>
 
       <div className="w-full">
-        <h2 className="text-md item-left mb-1">Enter you Github username:</h2>
+        <h2 className="text-md item-left mb-1">Enter your Github username:</h2>
         <div className="mb-4 w-full">
           <form.Field
             name="userName"
