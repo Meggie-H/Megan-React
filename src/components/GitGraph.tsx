@@ -1,15 +1,9 @@
 import { Gitgraph } from "@gitgraph/react";
 import { getCommits } from "../services/apiService";
-import { useEffect, useState } from "react";
 import { ICommit } from "../models";
 import { useMutation, useQuery } from "react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import ReadMore from "./ReadMore";
-
-// I'll have a list of branches, and if its the first time that i see it, i'll add it to the list and make a new branch for it
-// If its not the first time, i'll just commit to the branch
-
-// I'll look at the amount of branches that is in the commit, if two, then i'll merge the first into the sexond until I find a better way to do it
 
 // create an animation for the git graph
 function GitGraph() {
@@ -20,8 +14,6 @@ function GitGraph() {
 
   let branches: Record<string, any> = {};
 
-  console.log('API Response:', commitData);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -31,48 +23,47 @@ function GitGraph() {
   }
 
   return (
-
     <>
-    <div className="block lg:hidden">
-    {commitData?.map((commit) => (
-        <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
-        <img src="https://avatars.githubusercontent.com/u/90321356?v=4" alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
-        <div className='w-full'>
-          <div className="flex justify-between gap-4 text-gray-400 w-full">
-            <p>{commit.author?.name ? commit.author.name : "Unknown"}</p>
-            <p>{commit.date}</p>
-            <p>{commit.id}</p>
+      <div className="block lg:hidden">
+        {commitData?.map((commit) => (
+          <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
+          <img src="https://avatars.githubusercontent.com/u/90321356?v=4" alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
+          <div className='w-full'>
+            <div className="flex justify-between gap-4 text-gray-400 w-full">
+              <p>{commit.author?.name ? commit.author.name : "Unknown"}</p>
+              <p>{commit.date}</p>
+              <p>{commit.id}</p>
+            </div>
+            <h2 className='italic'>{commit.message}</h2>
+            </div>
           </div>
-          <h2 className='italic'>{commit.message}</h2>
-        </div>
+        ))}
       </div>
-    ))}
-    </div>
-    <div className="hidden lg:block">
-      <table className="bordered-table gap-4 w-screen border border-gray-300">
-        <thead className="w-full">
-          <tr className="border border-gray-300 column">
-            <th className="border border-gray-300 ">Description</th>
-            <th className="border border-gray-300 ">Date</th>
-            <th className="border border-gray-300 ">Author</th>
-            <th className="border border-gray-300 ">Commit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {commitData?.map((commit) => (
-            <tr key={commit.id}>
-              <td className="pl-4">
-                <ReadMore>{commit.message}</ReadMore>
-              </td>
-              {/* <td>{commit.message}</td> */}
-              <td className="text-center">{commit.date}</td>
-              <td className="text-center">{commit.author?.name ? commit.author.name : "Unknown"}</td>
-              <td className="text-center">{commit.id}</td>
+      <div className="hidden lg:block">
+        <table className="bordered-table gap-4 w-screen border border-gray-300">
+          <thead className="w-full">
+            <tr className="border border-gray-300 column">
+              <th className="border border-gray-300 ">Description</th>
+              <th className="border border-gray-300 ">Date</th>
+              <th className="border border-gray-300 ">Author</th>
+              <th className="border border-gray-300 ">Commit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {commitData?.map((commit) => (
+              <tr key={commit.id}>
+                <td className="pl-4">
+                  <ReadMore>{commit.message}</ReadMore>
+                </td>
+                {/* <td>{commit.message}</td> */}
+                <td className="text-center">{commit.date}</td>
+                <td className="text-center">{commit.author?.name ? commit.author.name : "Unknown"}</td>
+                <td className="text-center">{commit.id}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
 
     // I'm still implementing this. The logic is extremely hard, I will add this at the end when i have time.

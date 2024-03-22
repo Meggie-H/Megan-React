@@ -11,14 +11,13 @@ const ReadMore = ({ children } : ReadMoreProps) => {
         setIsReadMore(!isReadMore);
     };
     return (
-        <p className="text">
+        <p>
             {isReadMore ? text.slice(0, 50) : text}
             <span
                 onClick={toggleReadMore}
-                className="read-or-hide"
-                style={{ color: "cyan-600" }}
+                className="text-cyan-600 cursor-pointer"
             >
-                {isReadMore ? "...Read More" : " Show Less"}
+                {isReadMore ? " ...Read More" : " Show Less"}
             </span>
         </p>
     );
