@@ -1,5 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 import { getUser } from '../services/apiService';
+import { Link } from "@tanstack/react-router";
 
 const UserForm = () => {
   const form = useForm({
@@ -8,6 +9,7 @@ const UserForm = () => {
     },
     onSubmit: async ({ value }) => {
       // Set state
+
     },
   });
 
@@ -68,7 +70,7 @@ const UserForm = () => {
           type="submit"
           className="w-full rounded-md bg-blue-400 px-4 py-4 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
         >
-          Get your stats
+        <Link to={`/Dashboard`}>Get your stats</Link>
         </button>
       </div>
     </form>

@@ -13,6 +13,8 @@
     "@gitgraph/react": "^1.6.0",
     "@tanstack/react-form": "^0.16.0",
     "@tanstack/react-query": "^5.28.2",
+    "@tanstack/react-router": "^1.22.2",
+    "@tanstack/router-devtools": "^1.22.2",
     "formik": "^2.4.5",
     "octokit": "^3.1.2",
     "react": "^18.2.0",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.27.7",
+    "@tanstack/router-vite-plugin": "^1.20.5",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
