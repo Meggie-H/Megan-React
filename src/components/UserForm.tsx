@@ -9,7 +9,7 @@ const navigate = useNavigate({ from: '/' });
       userName: '',
     },
     onSubmit: async ({ value }) => {
-      navigate({ to: `/Dashboard/${value.userName}` });
+      navigate({ to: `${value.userName}/Dashboard` });
     },
   });
 
