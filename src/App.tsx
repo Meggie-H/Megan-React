@@ -1,17 +1,17 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
+import UserForm from './components/UserForm';
 
 const router = createRouter({ routeTree });
 
-declare module '@tanstack/react-router' {
-  interface Router {
-    router: typeof router;
-  }
-}
+
 
 function App() {
   return (
-    <RouterProvider router={router} />
+    <>
+
+    </>
+
   );
 }
 export default App;

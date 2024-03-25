@@ -1,12 +1,15 @@
 import { Gitgraph } from "@gitgraph/react";
 import { getCommits } from "../services/apiService";
 import { ICommit } from "../models";
-import { useMutation, useQuery } from "react-query";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation  } from "react-query";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
 import ReadMore from "./ReadMore";
+import { useParams } from "@tanstack/react-router";
 
 // create an animation for the git graph
 function GitGraph() {
+  const { username } = useParams({ strict: false });
+
   const { data: commitData, isLoading, isError } = useQuery({
     queryKey: [`getCommits`],
     queryFn: () => getCommits('Hugovs2000', 'React-Project'),
@@ -24,6 +27,7 @@ function GitGraph() {
 
   return (
     <>
+    <h1 className="text-2xl font-bold text-center">{username}</h1>
       <div className="block lg:hidden">
         {commitData?.map((commit) => (
           <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
