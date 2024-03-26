@@ -1,42 +1,60 @@
-import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse } from '../models'
+import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse, IRepository } from '../models'
 import { octokit } from '../../environments/apiKey';
+import { format } from 'date-fns';
 
 const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
 const baseUrl: string = `https://api.github.com/`;
 
-export function getRepos(): void {
-  fetch(baseUrl + `/users/${username}/repos`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network error');
+export async function getRepos(owner: string): Promise<IRepository[]> {
+  const response = await octokit.request(`${baseUrl}users/${owner}/repos`);
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch repositories for username ${owner}`);
+  }
+
+  const repoDataArray: IRepositoryResponse[] = response.data;
+
+  const repositories: IRepository[] = repoDataArray
+    .filter(
+      (repo) =>
+        repo.id && repo.name && repo.full_name && repo.owner
+    )
+    .map((repo) => {
+      const timestamp = repo.updated_at ? new Date(repo.updated_at) : new Date();
+
+      // Format the timestamp
+      const formattedDate = format(timestamp, 'dd MMMM yyyy');
+
+      if (!repo.language){
+        repo.language = "Unknown";
       }
-      return response.json() as Promise<IRepositoryResponse[]>;
-    })
-    .then(data => {
-      console.log('Repos:', data);
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
+
+      const repository: IRepository = {
+        id: repo.id,
+        name: repo.name,
+        fullName: repo.full_name,
+        owner: repo.owner,
+        description: repo.description,
+        updatedTime: formattedDate,
+        language: repo.language,
+      }
+      return repository;
     });
+
+  return repositories;
 }
 
-export function getOrgs(): Promise<IOrganisationResponse> {  
-    return fetch(baseUrl + `/users/${username}/orgs`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network error');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Orgs:', data);
-        return data;
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        throw error;
-      });
+export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {  
+  const response = await octokit.request(`${baseUrl}users/${owner}/orgs`);
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch organisations for username ${owner}`);
   }
+
+
+  const orgData: IOrganisationResponse[] = response.data;
+  return orgData;
+}
+// can i use a filter here?
+
 
   export function getOrgRepos(org: string): void {
     //need to get the url from getOrgs' response

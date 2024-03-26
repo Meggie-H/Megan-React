@@ -148,3 +148,12 @@ export interface IRepositoryResponse {
     };
   }
   
+  export interface IRepository {
+    id: number;
+    name: string;
+    fullName: string;
+    owner: SimpleUser;
+    description: string | null;
+    updatedTime: string | null;
+    language: string;
+  }
