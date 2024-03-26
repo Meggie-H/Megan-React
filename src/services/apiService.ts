@@ -92,9 +92,6 @@ export async function getCommits(
       type: commitType,
       id: commitData.sha.substring(0, 7),
     };
-    console.log(commitData.author?.avatar_url);
-    console.log(commitData);
-    console.log(dataValue.author?.avatar_url);
     return dataValue;
   });
 
