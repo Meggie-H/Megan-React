@@ -1,8 +1,7 @@
 import { Gitgraph } from "@gitgraph/react";
 import { getCommits } from "../services/apiService";
 import { ICommit } from "../models";
-import { useMutation  } from "react-query";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import ReadMore from "./ReadMore";
 import { useParams } from "@tanstack/react-router";
 
