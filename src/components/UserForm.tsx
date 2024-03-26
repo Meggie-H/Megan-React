@@ -1,15 +1,15 @@
 import { useForm } from '@tanstack/react-form';
 import { getUser } from '../services/apiService';
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 const UserForm = () => {
+const navigate = useNavigate({ from: '/' });
   const form = useForm({
     defaultValues: {
       userName: '',
     },
     onSubmit: async ({ value }) => {
-      // Set state
-
+      navigate({ to: `${value.userName}/Dashboard` });
     },
   });
 
@@ -36,7 +36,7 @@ const UserForm = () => {
           <form.Field
             name="userName"
             validators={{
-              onChangeAsyncDebounceMs: 500,
+              onChangeAsyncDebounceMs: 300,
               onSubmit: ({ value }) =>
                 !value ? 'A username is required' : undefined,
               onChangeAsync: async ({ value }) => {
@@ -70,7 +70,7 @@ const UserForm = () => {
           type="submit"
           className="w-full rounded-md bg-blue-400 px-4 py-4 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
         >
-        <Link to={`/Dashboard`}>Get your stats</Link>
+        Get your stats
         </button>
       </div>
     </form>
