@@ -2,7 +2,6 @@ import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, I
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
 
-const username: string = 'aaronabramov'; // will dynamically change the user later (fron state)
 const baseUrl: string = `https://api.github.com/`;
 
 export async function getRepos(owner: string): Promise<IRepository[]> {
@@ -20,8 +19,6 @@ export async function getRepos(owner: string): Promise<IRepository[]> {
     )
     .map((repo) => {
       const timestamp = repo.updated_at ? new Date(repo.updated_at) : new Date();
-
-      // Format the timestamp
       const formattedDate = format(timestamp, 'dd MMMM yyyy');
 
       if (!repo.language){
@@ -49,16 +46,9 @@ export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {
     throw new Error(`Failed to fetch organisations for username ${owner}`);
   }
 
-
   const orgData: IOrganisationResponse[] = response.data;
   return orgData;
 }
-// can i use a filter here?
-
-
-  export function getOrgRepos(org: string): void {
-    //need to get the url from getOrgs' response
-  }
 
 export async function getCommits(owner: string, repo: string): Promise<ICommit[]> {
   const response = await octokit.request(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
@@ -82,13 +72,16 @@ export async function getCommits(owner: string, repo: string): Promise<ICommit[]
     }
 
     const dataValue: ICommit = {
-      author: commitData.commit.author,
+      author: commitData.author,
       message: commitData.commit.message,
       branches: commitData.parents.map(parent => parent.sha),
       date: commitData.commit.author?.date ? commitData.commit.author.date.substring(0,10) : "Unknown",
       type: commitType,
       id: commitData.sha.substring(0, 7)
     };  
+    console.log(commitData.author?.avatar_url);
+    console.log(commitData);
+    console.log(dataValue.author?.avatar_url);
     return dataValue;
   });
 
