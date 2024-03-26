@@ -1,4 +1,11 @@
-import { IRepositoryResponse, IOrganisationResponse, ICommitResponse, ICommit, IUserSearchResponse, IRepository } from '../models'
+import {
+  IRepositoryResponse,
+  IOrganisationResponse,
+  ICommitResponse,
+  ICommit,
+  IUserSearchResponse,
+  IRepository,
+} from '../models';
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
 
@@ -13,16 +20,15 @@ export async function getRepos(owner: string): Promise<IRepository[]> {
   const repoDataArray: IRepositoryResponse[] = response.data;
 
   const repositories: IRepository[] = repoDataArray
-    .filter(
-      (repo) =>
-        repo.id && repo.name && repo.full_name && repo.owner
-    )
+    .filter((repo) => repo.id && repo.name && repo.full_name && repo.owner)
     .map((repo) => {
-      const timestamp = repo.updated_at ? new Date(repo.updated_at) : new Date();
+      const timestamp = repo.updated_at
+        ? new Date(repo.updated_at)
+        : new Date();
       const formattedDate = format(timestamp, 'dd MMMM yyyy');
 
-      if (!repo.language){
-        repo.language = "Unknown";
+      if (!repo.language) {
+        repo.language = 'Unknown';
       }
 
       const repository: IRepository = {
@@ -33,14 +39,14 @@ export async function getRepos(owner: string): Promise<IRepository[]> {
         description: repo.description,
         updatedTime: formattedDate,
         language: repo.language,
-      }
+      };
       return repository;
     });
 
   return repositories;
 }
 
-export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {  
+export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {
   const response = await octokit.request(`${baseUrl}users/${owner}/orgs`);
   if (response.status !== 200) {
     throw new Error(`Failed to fetch organisations for username ${owner}`);
@@ -50,11 +56,16 @@ export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {
   return orgData;
 }
 
-export async function getCommits(owner: string, repo: string): Promise<ICommit[]> {
-  const response = await octokit.request(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
+export async function getCommits(
+  owner: string,
+  repo: string,
+): Promise<ICommit[]> {
+  const response = await octokit.request(
+    `${baseUrl}repos/${owner}/${repo}/commits?per_page=100`,
+  );
   const commitData: ICommitResponse[] = response.data;
 
-  const allCommits: ICommit[] = commitData?.map(commitData => {
+  const allCommits: ICommit[] = commitData?.map((commitData) => {
     let commitType: 'initial' | 'merge' | 'commit' | 'branch';
     switch (commitData.parents.length) {
       case 0:
@@ -74,11 +85,13 @@ export async function getCommits(owner: string, repo: string): Promise<ICommit[]
     const dataValue: ICommit = {
       author: commitData.author,
       message: commitData.commit.message,
-      branches: commitData.parents.map(parent => parent.sha),
-      date: commitData.commit.author?.date ? commitData.commit.author.date.substring(0,10) : "Unknown",
+      branches: commitData.parents.map((parent) => parent.sha),
+      date: commitData.commit.author?.date
+        ? commitData.commit.author.date.substring(0, 10)
+        : 'Unknown',
       type: commitType,
-      id: commitData.sha.substring(0, 7)
-    };  
+      id: commitData.sha.substring(0, 7),
+    };
     console.log(commitData.author?.avatar_url);
     console.log(commitData);
     console.log(dataValue.author?.avatar_url);
@@ -88,14 +101,16 @@ export async function getCommits(owner: string, repo: string): Promise<ICommit[]
   return allCommits;
 }
 
-  export async function getUserSearch(username: string): Promise<IUserSearchResponse> {
-    const response = octokit.request(`${baseUrl}users/${username}`);
-    const userData : IUserSearchResponse= (await response).data;
-    return userData;
-  }
+export async function getUserSearch(
+  username: string,
+): Promise<IUserSearchResponse> {
+  const response = octokit.request(`${baseUrl}users/${username}`);
+  const userData: IUserSearchResponse = (await response).data;
+  return userData;
+}
 
-  export async function getUser(username: string): Promise<IUserSearchResponse> {
-    const response = octokit.request(`${baseUrl}users/${username}`);
-    const userData : IUserSearchResponse= (await response).data;
-    return userData;
-  }
+export async function getUser(username: string): Promise<IUserSearchResponse> {
+  const response = octokit.request(`${baseUrl}users/${username}`);
+  const userData: IUserSearchResponse = (await response).data;
+  return userData;
+}
