@@ -8,10 +8,11 @@ import { useParams } from "@tanstack/react-router";
 // create an animation for the git graph
 function GitGraph() {
   const { username } = useParams({ strict: false });
+  const { repo } = useParams({ strict: false });
 
   const { data: commitData, isLoading, isError } = useQuery({
     queryKey: [`getCommits`],
-    queryFn: () => getCommits('Hugovs2000', 'React-Project'),
+    queryFn: () => getCommits(username, repo),
   });
 
   let branches: Record<string, any> = {};
@@ -30,10 +31,10 @@ function GitGraph() {
       <div className="block lg:hidden">
         {commitData?.map((commit) => (
           <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
-          <img src="https://avatars.githubusercontent.com/u/90321356?v=4" alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
+          <img src={commit.author?.avatar_url} alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
           <div className='w-full'>
             <div className="flex justify-between gap-4 text-gray-400 w-full">
-              <p>{commit.author?.name ? commit.author.name : "Unknown"}</p>
+              <p>{commit.author?.login ? commit.author.login : "Unknown"}</p>
               <p>{commit.date}</p>
               <p>{commit.id}</p>
             </div>
@@ -58,9 +59,8 @@ function GitGraph() {
                 <td className="pl-4">
                   <ReadMore>{commit.message}</ReadMore>
                 </td>
-                {/* <td>{commit.message}</td> */}
                 <td className="text-center">{commit.date}</td>
-                <td className="text-center">{commit.author?.name ? commit.author.name : "Unknown"}</td>
+                <td className="text-center">{commit.author?.login ? commit.author.login : "Unknown"}</td>
                 <td className="text-center">{commit.id}</td>
               </tr>
             ))}
