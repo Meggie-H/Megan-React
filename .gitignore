@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 **environments
+src/routeTree.gen.ts
