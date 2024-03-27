@@ -26,15 +26,17 @@ function GitTable() {
         <h2 className="py-4 w-full text-center">Commit data</h2>
         {commitData?.map((commit) => (
           <div key={commit.id} className='bg-gray-950 border-b border-t border-gray-800 items-center p-4'>
-              <div className="flex justify-between align-center gap-4 w-full h-12 text-gray-100 pb-3">
-                <div className="flex align-center h-full">
-                  <img src={commit.author?.avatar_url} alt="Avatar" className="h-8 w-8 rounded-full mr-2"/>
+              <div className="flex justify-between align-center gap-4 w-full text-gray-100 pb-3 text-md">
+                <div className="flex align-center">
+                  <img src={commit.author?.avatar_url} alt="Avatar" className="h-6 w-6 rounded-full mr-2"/>
                   <p>{commit.author?.login ? commit.author.login : "Unknown"}</p>
                 </div>
-                <p>{commit.date}</p>
-                <p>{commit.id}</p>
+                <div className="flex gap-2">                
+                  <div className="badge badge-primary badge-outline">{commit.date}</div>
+                  <div className="badge badge-secondary badge-outline">{commit.id}</div>
+                </div>
               </div> 
-              <h2 className='italic text-gray-400'>{commit.message}</h2>
+              <p className='italic text-gray-400'>{commit.message}</p>
           </div>
         ))}
       </div>

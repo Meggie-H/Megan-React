@@ -26,9 +26,7 @@ function GitGraph() {
   }
 
   return (
-    <>
-
-    </>
+    <></>
 
     // I'm still implementing this. The logic is extremely hard, I will add this at the end when i have time.
   //   <Gitgraph>
