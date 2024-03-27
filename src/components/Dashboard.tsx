@@ -1,11 +1,13 @@
 import SelectButton from './SelectButton';
-import GitGraph from './GitGraph';
+import GitTable from './GitTable';
 
 const Dashboard = () => {
   return (
-    <div className="bg-grey-950">
+    <div className="bg-gray-950">
       <SelectButton />
-      <GitGraph />
+      <div className='flex justify-center items-center'>
+        <GitTable />
+      </div>
     </div>
   );
 };

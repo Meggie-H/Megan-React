@@ -55,7 +55,7 @@ const navigate = useNavigate({ from: '/' });
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className="rounded-md border  border-gray-800 bg-gray-900 p-4 focus:outline-none focus:ring focus:ring-blue-300"
+                  className="rounded-md border border-gray-800 bg-gray-900 p-4 focus:outline-none focus:ring focus:ring-blue-300"
                 />
                 {field.state.meta.errors ? (
                   <em className="text-purple-500" role="alert">

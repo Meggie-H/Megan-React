@@ -27,8 +27,7 @@ function GitGraph() {
 
   return (
     <>
-    <h1 className="text-2xl font-bold text-center">{username}</h1>
-      <div className="block lg:hidden">
+      <div className="block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden">
         {commitData?.map((commit) => (
           <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
           <img src={commit.author?.avatar_url} alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
@@ -43,8 +42,8 @@ function GitGraph() {
           </div>
         ))}
       </div>
-      <div className="hidden lg:block">
-        <table className="bordered-table gap-4 w-screen border border-gray-300">
+      <div className="hidden lg:block z">
+        <table className="gap-4 md:w-2/3 border border-gray-300">
           <thead className="w-full">
             <tr className="border border-gray-300 column">
               <th className="border border-gray-300 ">Description</th>
