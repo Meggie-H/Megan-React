@@ -27,45 +27,7 @@ function GitGraph() {
 
   return (
     <>
-      <div className="block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden">
-        {commitData?.map((commit) => (
-          <div key={commit.id} className='border-t border-b border-gray-300 p-2 flex items-center mx-2'>
-          <img src={commit.author?.avatar_url} alt="Avatar" className="h-8 w-8 rounded-full mr-2"></img>
-          <div className='w-full'>
-            <div className="flex justify-between gap-4 text-gray-400 w-full">
-              <p>{commit.author?.login ? commit.author.login : "Unknown"}</p>
-              <p>{commit.date}</p>
-              <p>{commit.id}</p>
-            </div>
-            <h2 className='italic'>{commit.message}</h2>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="hidden lg:block z">
-        <table className="gap-4 md:w-2/3 border border-gray-300">
-          <thead className="w-full">
-            <tr className="border border-gray-300 column">
-              <th className="border border-gray-300 ">Description</th>
-              <th className="border border-gray-300 ">Date</th>
-              <th className="border border-gray-300 ">Author</th>
-              <th className="border border-gray-300 ">Commit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {commitData?.map((commit) => (
-              <tr key={commit.id}>
-                <td className="pl-4">
-                  <ReadMore>{commit.message}</ReadMore>
-                </td>
-                <td className="text-center">{commit.date}</td>
-                <td className="text-center">{commit.author?.login ? commit.author.login : "Unknown"}</td>
-                <td className="text-center">{commit.id}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+
     </>
 
     // I'm still implementing this. The logic is extremely hard, I will add this at the end when i have time.
