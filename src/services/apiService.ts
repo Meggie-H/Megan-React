@@ -8,6 +8,7 @@ import {
 } from '../models';
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
+import { IIssue } from '../models/issues';
 
 const baseUrl: string = `https://api.github.com/`;
 
@@ -110,4 +111,28 @@ export async function getUser(username: string): Promise<IUserSearchResponse> {
   const response = octokit.request(`${baseUrl}users/${username}`);
   const userData: IUserSearchResponse = (await response).data;
   return userData;
+}
+
+export async function getOpenIssueCount(
+  owner: string,
+  repo: string,
+): Promise<number> {
+  const response = await octokit.request(
+    `${baseUrl}repos/${owner}/${repo}/issues?state=open`,
+  );
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch open issues for ${owner}/${repo}`);
+  }
+  return response.data.length;
+}
+
+export async function getClosedIssueCount(
+  owner: string,
+  repo: string,
+): Promise<number> {
+  const response = await octokit.request(
+    `${baseUrl}repos/${owner}/${repo}/issues?state=closed`,
+  );
+  const userData: IIssue[] = response.data;
+  return userData.length;
 }
