@@ -5,6 +5,9 @@ import {
   ICommit,
   IUserSearchResponse,
   IRepository,
+  IBuildStats,
+  IWorkflowRuns,
+  WorkflowRun,
 } from '../models';
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
@@ -133,6 +136,40 @@ export async function getClosedIssueCount(
   const response = await octokit.request(
     `${baseUrl}repos/${owner}/${repo}/issues?state=closed`,
   );
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch open issues for ${owner}/${repo}`);
+  }
   const userData: IIssue[] = response.data;
   return userData.length;
+}
+
+export async function getBuildStats(owner: string, repo: string): Promise<IBuildStats> {
+  const response = await octokit.request(
+    `${baseUrl}repos/${owner}/${repo}/actions/runs?status=completed&per_page=100`,
+  );
+
+  if (response.status !== 200) {
+    throw new Error(`Failed to fetch open build stats for ${owner}/${repo}`);
+  }
+
+  const WorkflowRunsData: IWorkflowRuns = response.data;
+
+  let initialBuildStats :  IBuildStats = {
+    successes: 0,
+    failures: 0,
+  };
+  
+  const buildStats = WorkflowRunsData.workflow_runs.reduce(
+    (acc: IBuildStats, build: WorkflowRun) => {
+      if (build.conclusion?.includes("success")) {
+        acc.successes++;
+      } else {
+        acc.failures++;
+      }
+      return acc;
+    },
+    initialBuildStats
+  );
+
+  return buildStats;
 }
