@@ -86,9 +86,7 @@ export async function getCommits(
       author: commitData.author,
       message: commitData.commit.message,
       branches: commitData.parents.map((parent) => parent.sha),
-      date: commitData.commit.author?.date
-        ? commitData.commit.author.date.substring(0, 10)
-        : 'Unknown',
+      date: commitData.commit.author?.date?.substring(0, 10) ?? 'Unknown',
       type: commitType,
       id: commitData.sha.substring(0, 7),
     };
