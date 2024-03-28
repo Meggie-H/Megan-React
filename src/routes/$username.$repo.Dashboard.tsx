@@ -1,5 +1,4 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router';
-import Dashboard from '../components/Dashboard';
 import Navbar from '../components/Navbar';
 
 export const Route = createFileRoute('/$username/$repo/dashboard')({
