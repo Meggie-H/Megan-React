@@ -8,7 +8,7 @@ const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
   const { username } = useParams({ strict: false });
   const RepoQuery = useQuery({
-    queryKey: [`getRepos`],
+    queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
   });
 
@@ -28,7 +28,7 @@ const PickRepoList = () => {
         </h1>
         {RepoQuery.data?.map((repo) => (
           <Link
-            to={`/${username}/${repo.name}/Dashboard`}
+            to={`/${username}/${repo.name}/dashboard`}
             key={repo.id}
             className="flex w-full transform flex-col items-center border-b border-t border-gray-800 bg-gray-950 p-4 transition-transform duration-300 hover:scale-[1.01] hover:cursor-pointer hover:bg-gray-800"
           >

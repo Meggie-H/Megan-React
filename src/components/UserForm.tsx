@@ -1,15 +1,15 @@
 import { useForm } from '@tanstack/react-form';
 import { getUser } from '../services/apiService';
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from '@tanstack/react-router';
 
 const UserForm = () => {
-const navigate = useNavigate({ from: '/' });
+  const navigate = useNavigate({ from: '/' });
   const form = useForm({
     defaultValues: {
       userName: '',
     },
     onSubmit: async ({ value }) => {
-      navigate({ to: `${value.userName}/Repos` });
+      navigate({ to: `${value.userName}/repos` });
     },
   });
 
@@ -55,7 +55,7 @@ const navigate = useNavigate({ from: '/' });
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className="rounded-md border  border-gray-800 bg-gray-900 p-4 focus:outline-none focus:ring focus:ring-blue-300"
+                  className="rounded-md border border-gray-800 bg-gray-900 p-4 focus:outline-none focus:ring focus:ring-blue-300"
                 />
                 {field.state.meta.errors ? (
                   <em className="text-purple-500" role="alert">
@@ -70,7 +70,7 @@ const navigate = useNavigate({ from: '/' });
           type="submit"
           className="w-full rounded-md bg-blue-400 px-4 py-4 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
         >
-        Get your stats
+          Get your stats
         </button>
       </div>
     </form>
