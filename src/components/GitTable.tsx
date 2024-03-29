@@ -1,13 +1,17 @@
-import { getCommits } from "../services/apiService";
-import { useQuery } from "@tanstack/react-query";
-import ReadMore from "./ReadMore";
-import { useParams } from "@tanstack/react-router";
+import { getCommits } from '../services/apiService';
+import { useQuery } from '@tanstack/react-query';
+import ReadMore from './ReadMore';
+import { useParams } from '@tanstack/react-router';
 
 function GitTable() {
   const { username } = useParams({ strict: false });
   const { repo } = useParams({ strict: false });
 
-  const { data: commitData, isLoading, isError } = useQuery({
+  const {
+    data: commitData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [`getCommits`],
     queryFn: () => getCommits(username, repo),
   });
@@ -22,48 +26,64 @@ function GitTable() {
 
   return (
     <>
-      <div className="block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden m-4">
-        <h2 className="py-4 w-full text-center">Commit data</h2>
+      <div className="m-4 block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden">
+        <h2 className="w-full py-4 text-center">Commit data</h2>
         {commitData?.map((commit) => (
-          <div key={commit.id} className='bg-gray-950 border-b border-t border-gray-800 items-center p-4'>
-              <div className="flex justify-between align-center gap-4 w-full text-gray-100 pb-3 text-md">
-                <div className="flex align-center">
-                  <img src={commit.author?.avatar_url} alt="Avatar" className="h-6 w-6 rounded-full mr-2"/>
-                  <p>{commit.author?.login ? commit.author.login : "Unknown"}</p>
+          <div
+            key={commit.id}
+            className="items-center border-b border-t border-gray-800 bg-gray-950 p-4"
+          >
+            <div className="align-center text-md flex w-full justify-between gap-4 pb-3 text-gray-100">
+              <div className="align-center flex">
+                <img
+                  src={commit.author?.avatar_url}
+                  alt="Avatar"
+                  className="mr-2 h-6 w-6 rounded-full"
+                />
+                <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
+              </div>
+              <div className="flex gap-2">
+                <div className="badge badge-primary badge-outline">
+                  {commit.date}
                 </div>
-                <div className="flex gap-2">                
-                  <div className="badge badge-primary badge-outline">{commit.date}</div>
-                  <div className="badge badge-secondary badge-outline">{commit.id}</div>
+                <div className="badge badge-secondary badge-outline">
+                  {commit.id}
                 </div>
-              </div> 
-              <p className='italic text-gray-400'>{commit.message}</p>
+              </div>
+            </div>
+            <p className="italic text-gray-400">{commit.message}</p>
           </div>
         ))}
       </div>
-      <div className="hidden lg:block text-gray-300 border border-gray-600 rounded-lg md:w-5/6 overflow-hidden">
-        <table className="gap-4 w-full">
+      <div className="hidden overflow-hidden rounded-lg border border-gray-600 text-gray-300 md:w-5/6 lg:block">
+        <table className="w-full gap-4">
           <thead className="w-full bg-gray-900 ">
-            <tr className="border border-gray-600 column ">
-              <th className="border w-1/2 border-gray-600 p-4">Description</th>
-              <th className="border w-1/6 border-gray-600 ">Date</th>
-              <th className="border w-1/6 border-gray-600 ">Author</th>
-              <th className="border w-1/6 border-gray-600 ">Commit</th>
+            <tr className="column border border-gray-600 ">
+              <th className="w-1/2 border border-gray-600 p-4">Description</th>
+              <th className="w-1/6 border border-gray-600 ">Date</th>
+              <th className="w-1/6 border border-gray-600 ">Author</th>
+              <th className="w-1/6 border border-gray-600 ">Commit</th>
             </tr>
           </thead>
           <tbody>
             {commitData?.map((commit) => (
-              <tr key={commit.id} className="border border-b border-t border-gray-800">
-                <td className="pl-4 py-3">
-                {commit.message.length > 50 ? (
-                  <ReadMore>{commit.message}</ReadMore>
-                ) : (
-                  commit.message
-                )}
+              <tr
+                key={commit.id}
+                className="border border-b border-t border-gray-800"
+              >
+                <td className="py-3 pl-4">
+                  {commit.message.length > 50 ? (
+                    <ReadMore>{commit.message}</ReadMore>
+                  ) : (
+                    commit.message
+                  )}
                 </td>
                 <td className="text-center">{commit.date}</td>
                 <td className="text-center">
-                    {/* <img src={commit.author?.avatar_url} alt="Avatar" className="h-full w-6 rounded-full mr-2"></img> */}
-                    <p>{commit.author?.login ? commit.author.login : "Unknown"}</p>
+                  {/* <img src={commit.author?.avatar_url} alt="Avatar" className="h-full w-6 rounded-full mr-2"></img> */}
+                  <p>
+                    {commit.author?.login ? commit.author.login : 'Unknown'}
+                  </p>
                 </td>
                 <td className="text-center">{commit.id}</td>
               </tr>
