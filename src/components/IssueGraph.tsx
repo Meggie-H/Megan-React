@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
 import { getClosedIssueCount, getOpenIssueCount } from "../services/apiService";
 
 const IssueGraph = () => {
@@ -24,7 +24,7 @@ const IssueGraph = () => {
     const data = {
         labels: ['Open', 'Completed'],
         datasets: [{
-            label: 'My First Dataset',
+            label: 'Issues',
             data: [ OpenIssueQuery.data, ClosedIssueQuery.data],
             backgroundColor: [
                 'red',
@@ -35,13 +35,18 @@ const IssueGraph = () => {
         }]
     };
 
-    console.log(OpenIssueQuery.data);
-    console.log(ClosedIssueQuery.data);
+    const options = {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center p-4 bg-gray-900 rounded-2xl">
             <h2 className="width-full">Issues</h2>
-            <Doughnut data={data} />
+            <Bar data={data} options={options}/>
         </div>
     );
 }

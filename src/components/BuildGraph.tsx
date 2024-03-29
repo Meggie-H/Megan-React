@@ -27,7 +27,7 @@ const BuildGraph = () => {
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center p-4 bg-gray-900 rounded-2xl">
             <h2 className="width-full">Builds</h2>
             <Doughnut data={data} />
         </div>

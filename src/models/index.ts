@@ -5,3 +5,4 @@ export * from './language';
 export * from './user';
 export * from './issues';
 export * from './build';
+export * from './contributors';
