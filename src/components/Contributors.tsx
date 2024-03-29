@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "@tanstack/react-router";
-import { getContributors } from "../services/apiService";
+import { getContributors } from "../services/StatsAPI";
 import { IContributor } from "../models";
 
 

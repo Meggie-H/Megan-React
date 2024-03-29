@@ -1,5 +1,5 @@
 import { Gitgraph } from "@gitgraph/react";
-import { getCommits } from "../services/apiService";
+import { getCommits } from "../services/CommitsAPI";
 import { ICommit } from "../models";
 import { useQuery } from "@tanstack/react-query";
 import ReadMore from "./ReadMore";

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getRepos } from '../services/apiService';
+import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';
 import { ILanguageColors } from '../models';
 import { Link, useParams } from '@tanstack/react-router';
