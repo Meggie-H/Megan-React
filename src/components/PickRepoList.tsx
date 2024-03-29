@@ -44,7 +44,7 @@ const PickRepoList = () => {
                   className="h-3 w-3 rounded-full"
                   style={{
                     backgroundColor:
-                      languageColorsData[repo.language] || 'gray',
+                      languageColorsData[repo.language] ?? 'gray',
                   }}
                 ></div>
                 <p className="pl-1 text-left text-sm">{repo.language}</p>

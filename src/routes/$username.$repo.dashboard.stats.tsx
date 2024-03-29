@@ -3,6 +3,7 @@ import IssueGraph from '../components/IssueGraph'
 import BuildGraph from '../components/BuildGraph'
 import Contributors from '../components/Contributors'
 import CommitGraph from '../components/CommitGraph'
+import LanguageGraph from '../components/LanguageGraph'
 
 export const Route = createFileRoute('/$username/$repo/dashboard/stats')({
   component: () => (
@@ -11,6 +12,7 @@ export const Route = createFileRoute('/$username/$repo/dashboard/stats')({
       <BuildGraph />
       <Contributors />
       <CommitGraph />
+      <LanguageGraph />
     </div>
   ),
 })
