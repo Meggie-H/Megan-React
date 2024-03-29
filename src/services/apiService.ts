@@ -8,11 +8,15 @@ import {
   IBuildStats,
   IWorkflowRuns,
   WorkflowRun,
+  ILanguage,
+  ILanguageResponse,
+  ILanguageColors
 } from '../models';
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
 import { IIssue } from '../models/issues';
 import { IContributor, IContributorResponse } from '../models/contributors';
+import languageColors from '../json/languageColors.json';
 
 const baseUrl: string = `https://api.github.com/`;
 
@@ -194,6 +198,39 @@ export async function getContributors(owner: string, repo: string): Promise<ICon
     return contributors;
   } catch (error) {
     console.error('Error fetching contributors:', error);
+    throw error;
+  }
+}
+
+export async function getLanguageStats(owner: string, repo: string): Promise<ILanguage>{
+  try {
+    const response = await octokit.request(
+      `${baseUrl}repos/${owner}/${repo}/languages`
+    );
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch languages');
+    }
+
+    if (response.data === null) {
+      throw new Error('No languages found');
+    }
+
+    const responseData: ILanguageResponse = response.data;
+    const languageColorsData: ILanguageColors = languageColors;
+    const languageNames = Object.keys(responseData);
+    const languageData = languageNames.map(language => responseData[language]);
+    const languageColorsDataArray = languageNames.map(language => languageColorsData[language] ?? '#cccccc');
+
+    const languageStats: ILanguage = {
+      languages: languageNames,
+      colors: languageColorsDataArray,
+      percentages: languageData,
+    };
+
+    return languageStats;
+
+  } catch (error) {
     throw error;
   }
 }
