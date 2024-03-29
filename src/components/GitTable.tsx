@@ -80,7 +80,6 @@ function GitTable() {
                 </td>
                 <td className="text-center">{commit.date}</td>
                 <td className="text-center">
-                  {/* <img src={commit.author?.avatar_url} alt="Avatar" className="h-full w-6 rounded-full mr-2"></img> */}
                   <p>
                     {commit.author?.login ? commit.author.login : 'Unknown'}
                   </p>
