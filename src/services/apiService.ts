@@ -12,6 +12,7 @@ import {
 import { octokit } from '../../environments/apiKey';
 import { format } from 'date-fns';
 import { IIssue } from '../models/issues';
+import { IContributor, IContributorResponse } from '../models/contributors';
 
 const baseUrl: string = `https://api.github.com/`;
 
@@ -172,4 +173,27 @@ export async function getBuildStats(owner: string, repo: string): Promise<IBuild
   );
 
   return buildStats;
+}
+
+export async function getContributors(owner: string, repo: string): Promise<IContributor[]> {
+  try {
+    const response = await octokit.request(
+      `${baseUrl}repos/${owner}/${repo}/contributors`
+    );
+
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch contributors');
+    }
+
+    const contributors: IContributor[] = response.data.map((contributor: IContributorResponse) => ({
+      name: contributor.login,
+      avatar: contributor.avatar_url,
+      contributions: contributor.contributions,
+    }));
+
+    return contributors;
+  } catch (error) {
+    console.error('Error fetching contributors:', error);
+    throw error;
+  }
 }
