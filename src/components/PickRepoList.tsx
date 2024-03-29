@@ -8,7 +8,7 @@ const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
   const { username } = useParams({ strict: false });
   const RepoQuery = useQuery({
-    queryKey: [`getRepos`],
+    queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
   });
 

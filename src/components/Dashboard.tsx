@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div className="bg-gray-950">
       <SelectButton />
-      <div className='flex justify-center items-center'>
+      <div className="flex items-center justify-center">
         <GitTable />
       </div>
     </div>

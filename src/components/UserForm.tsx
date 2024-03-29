@@ -3,7 +3,7 @@ import { getUser } from '../services/UserAPI';
 import { useNavigate } from "@tanstack/react-router";
 
 const UserForm = () => {
-const navigate = useNavigate({ from: '/' });
+  const navigate = useNavigate({ from: '/' });
   const form = useForm({
     defaultValues: {
       userName: '',
@@ -70,7 +70,7 @@ const navigate = useNavigate({ from: '/' });
           type="submit"
           className="w-full rounded-md bg-blue-400 px-4 py-4 text-white hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
         >
-        Get your stats
+          Get your stats
         </button>
       </div>
     </form>
