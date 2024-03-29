@@ -6,3 +6,7 @@ export interface ILanguage {
     type: string;
     };
 }
+
+export interface ILanguageColors {
+    [key: string]: string;
+  }
