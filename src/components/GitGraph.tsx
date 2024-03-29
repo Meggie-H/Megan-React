@@ -14,7 +14,7 @@ function GitGraph() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: [`getCommits`],
+    queryKey: [`getCommits`, username, repo],
     queryFn: () => getCommits(username, repo),
   });
 
