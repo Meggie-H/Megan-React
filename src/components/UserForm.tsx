@@ -1,6 +1,6 @@
 import { useForm } from '@tanstack/react-form';
 import { getUser } from '../services/UserAPI';
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from '@tanstack/react-router';
 
 const UserForm = () => {
   const navigate = useNavigate({ from: '/' });

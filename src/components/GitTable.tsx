@@ -1,7 +1,7 @@
-import { getCommits } from "../services/CommitsAPI";
-import { useQuery } from "@tanstack/react-query";
-import ReadMore from "./ReadMore";
-import { useParams } from "@tanstack/react-router";
+import { getCommits } from '../services/CommitsAPI';
+import { useQuery } from '@tanstack/react-query';
+import ReadMore from './ReadMore';
+import { useParams } from '@tanstack/react-router';
 
 function GitTable() {
   const { username } = useParams({ strict: false });

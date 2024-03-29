@@ -1,5 +1,5 @@
-import { octokit } from "../../environments/apiKey";
-import { IUserSearchResponse } from "../models";
+import { octokit } from '../../environments/apiKey';
+import { IUserSearchResponse } from '../models';
 
 const baseUrl: string = `https://api.github.com/`;
 

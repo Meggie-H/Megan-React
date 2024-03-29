@@ -1,5 +1,9 @@
 import { octokit } from '../../environments/apiKey';
-import { IRepositoryResponse, IOrganisationResponse, IRepository } from '../models';
+import {
+  IRepositoryResponse,
+  IOrganisationResponse,
+  IRepository,
+} from '../models';
 import { format } from 'date-fns';
 
 const baseUrl: string = `https://api.github.com/`;
@@ -14,8 +18,8 @@ export async function getRepos(owner: string): Promise<IRepository[]> {
     const repoDataArray: IRepositoryResponse[] = response.data;
 
     const repositories: IRepository[] = repoDataArray
-      .filter(repo => repo.id && repo.name && repo.full_name && repo.owner)
-      .map(repo => processRepository(repo));
+      .filter((repo) => repo.id && repo.name && repo.full_name && repo.owner)
+      .map((repo) => processRepository(repo));
 
     return repositories;
   } catch (error) {

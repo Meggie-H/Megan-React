@@ -3,9 +3,14 @@ import { ICommit, ICommitResponse } from '../models';
 
 const baseUrl: string = `https://api.github.com/`;
 
-export async function getCommits(owner: string, repo: string): Promise<ICommit[]> {
+export async function getCommits(
+  owner: string,
+  repo: string,
+): Promise<ICommit[]> {
   try {
-    const response = await octokit.request(`${baseUrl}repos/${owner}/${repo}/commits?per_page=100`);
+    const response = await octokit.request(
+      `${baseUrl}repos/${owner}/${repo}/commits?per_page=100`,
+    );
     if (response.status !== 200) {
       throw new Error(`Failed to fetch commits for ${owner}/${repo}`);
     }
@@ -26,8 +31,10 @@ function processCommitData(commitData: ICommitResponse): ICommit {
   const dataValue: ICommit = {
     author: commitData.author,
     message: commitData.commit.message,
-    branches: commitData.parents.map(parent => parent.sha),
-    date: commitData.commit.author?.date ? commitData.commit.author.date.substring(0, 10) : 'Unknown',
+    branches: commitData.parents.map((parent) => parent.sha),
+    date: commitData.commit.author?.date
+      ? commitData.commit.author.date.substring(0, 10)
+      : 'Unknown',
     type: commitType,
     id: commitData.sha.substring(0, 7),
   };
@@ -35,7 +42,9 @@ function processCommitData(commitData: ICommitResponse): ICommit {
   return dataValue;
 }
 
-function getCommitType(parentsLength: number): 'initial' | 'merge' | 'commit' | 'branch' {
+function getCommitType(
+  parentsLength: number,
+): 'initial' | 'merge' | 'commit' | 'branch' {
   switch (parentsLength) {
     case 0:
       return 'initial';
