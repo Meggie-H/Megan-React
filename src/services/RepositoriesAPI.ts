@@ -10,7 +10,10 @@ const baseUrl: string = `https://api.github.com/`;
 
 export async function getRepos(owner: string): Promise<IRepository[]> {
   try {
-    const response = await octokit.request(`${baseUrl}users/${owner}/repos`);
+    const response = await octokit.request<IRepositoryResponse[]>({
+      method: 'GET',
+      url: `${baseUrl}users/${owner}/repos`,
+    });
     if (response.status !== 200) {
       throw new Error(`Failed to fetch repositories for username ${owner}`);
     }
@@ -49,7 +52,10 @@ function processRepository(repo: IRepositoryResponse): IRepository {
 
 export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {
   try {
-    const response = await octokit.request(`${baseUrl}users/${owner}/orgs`);
+    const response = await octokit.request<IOrganisationResponse[]>({
+      method: 'GET',
+      url: `${baseUrl}users/${owner}/orgs`,
+    });
     if (response.status !== 200) {
       throw new Error(`Failed to fetch organisations for username ${owner}`);
     }

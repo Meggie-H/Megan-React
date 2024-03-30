@@ -8,15 +8,16 @@ export async function getCommits(
   repo: string,
 ): Promise<ICommit[]> {
   try {
-    const response = await octokit.request(
-      `${baseUrl}repos/${owner}/${repo}/commits?per_page=100`,
-    );
+    const response = await octokit.request<ICommitResponse[]>({
+      method: 'GET',
+      url: `${baseUrl}repos/${owner}/${repo}/commits?per_page=100`,
+    });
     if (response.status !== 200) {
       throw new Error(`Failed to fetch commits for ${owner}/${repo}`);
     }
 
     const commitData: ICommitResponse[] = response.data;
-    const allCommits: ICommit[] = commitData?.map(processCommitData);
+    const allCommits: ICommit[] = commitData.map(processCommitData);
 
     return allCommits;
   } catch (error) {
@@ -32,9 +33,7 @@ function processCommitData(commitData: ICommitResponse): ICommit {
     author: commitData.author,
     message: commitData.commit.message,
     branches: commitData.parents.map((parent) => parent.sha),
-    date: commitData.commit.author?.date
-      ? commitData.commit.author.date.substring(0, 10)
-      : 'Unknown',
+    date: commitData.commit.author?.date.substring(0, 10) ?? 'Unknown',
     type: commitType,
     id: commitData.sha.substring(0, 7),
   };

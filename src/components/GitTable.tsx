@@ -1,12 +1,13 @@
+import React from 'react';
 import { getCommits } from '../services/CommitsAPI';
 import { useQuery } from '@tanstack/react-query';
 import ReadMore from './ReadMore';
 import { useParams } from '@tanstack/react-router';
+import { RouteParams } from '../models';
 
 function GitTable() {
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
-
+  const {username, repo} : RouteParams = useParams({ strict: false });
+  
   const {
     data: commitData,
     isLoading,

@@ -1,14 +1,15 @@
+import React from 'react';
 import { useParams } from '@tanstack/react-router';
 import { getBuildStats } from '../services/StatsAPI';
 import { useQuery } from '@tanstack/react-query';
 import { Doughnut } from 'react-chartjs-2';
+import { RouteParams } from '../models';
 
 const BuildGraph = () => {
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
+  const {username, repo} : RouteParams = useParams({ strict: false });
 
   const BuildStatsQuery = useQuery({
-    queryKey: [`getBuildStats`],
+    queryKey: [`getBuildStats`, username, repo],
     queryFn: () => getBuildStats(username, repo),
   });
 

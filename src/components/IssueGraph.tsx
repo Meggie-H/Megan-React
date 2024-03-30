@@ -1,14 +1,15 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
+import { RouteParams } from '../models';
 
 const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
+  const {username, repo} : RouteParams = useParams({ strict: false });
 
   const OpenIssueQuery = useQuery({
     queryKey: [`getOpenIssueCount`, username, repo],

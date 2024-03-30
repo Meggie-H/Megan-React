@@ -63,7 +63,6 @@ export interface IIssue {
   number: number;
   title: string;
   user: User;
-  labels: any[]; // Assuming labels are not used in this example
   state: string;
   locked: boolean;
   assignee: Assignee | null;

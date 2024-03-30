@@ -1,11 +1,11 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
-import { IContributor } from '../models';
+import { IContributor, RouteParams } from '../models';
 
 const Contributors = () => {
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
+  const {username, repo} : RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
     queryKey: [`getContributors`, username, repo],

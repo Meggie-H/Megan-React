@@ -1,11 +1,12 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { getLanguageStats } from '../services/StatsAPI';
 import { Doughnut } from 'react-chartjs-2';
+import { RouteParams } from '../models';
 
 const LanguageGraph = () => {
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
+  const {username, repo} : RouteParams = useParams({ strict: false });
 
   const LanguagesStatsQuery = useQuery({
     queryKey: [`getLanguageStats`, username, repo],

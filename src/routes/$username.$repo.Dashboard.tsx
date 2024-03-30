@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet, createFileRoute } from '@tanstack/react-router';
 import Navbar from '../components/Navbar';
 

@@ -14,9 +14,12 @@ import languageColors from '../json/languageColors.json';
 
 const baseUrl: string = `https://api.github.com/repos/`;
 
-async function makeApiRequest(url: string): Promise<any> {
+async function makeApiRequest<T>(url: string): Promise<T> {
   try {
-    const response = await octokit.request(url);
+    const response = await octokit.request<T>({
+      method: 'GET',
+      url: url,
+    })
     if (response.status !== 200) {
       throw new Error(`Request failed with status ${response.status}`);
     }

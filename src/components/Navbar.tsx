@@ -1,11 +1,13 @@
+import React from 'react';
 import { Link, useParams } from '@tanstack/react-router';
 import CommitIcon from '@mui/icons-material/Commit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import { RouteParams } from '../models';
 
 const Navbar = () => {
-  const { repo } = useParams({ strict: false });
-  const { username } = useParams({ strict: false });
+  const {username, repo} : RouteParams = useParams({ strict: false });
+  
   return (
     <div className="w-screen border-b border-gray-600 bg-black px-4 pb-0 text-gray-400">
       <div className="breadcrumbs text-lg">
