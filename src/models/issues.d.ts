@@ -30,8 +30,6 @@ interface Reaction {
   eyes: number;
 }
 
-interface Assignee extends User {}
-
 interface Milestone {
   url: string;
   html_url: string;
@@ -65,8 +63,8 @@ export interface IIssue {
   user: User;
   state: string;
   locked: boolean;
-  assignee: Assignee | null;
-  assignees: Assignee[];
+  User: User | null;
+  Users: User[];
   milestone: Milestone | null;
   comments: number;
   created_at: string;

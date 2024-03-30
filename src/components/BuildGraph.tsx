@@ -14,7 +14,7 @@ const BuildGraph = () => {
   });
 
   const data = {
-    labels: ['Failed', 'Succeful'],
+    labels: ['Failed', 'Successful'],
     datasets: [
       {
         label: 'Builds',
