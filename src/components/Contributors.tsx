@@ -26,19 +26,18 @@ const Contributors = () => {
 
   return (
     <div className="bg-gray-950">
-      <h2 className="text-white">Contributors</h2>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-left">
         {ContributorQuery.data?.map((contributor: IContributor) => (
           <div
             key={contributor.name}
-            className="m-4 flex flex-col items-center rounded-2xl bg-gray-900 p-4"
+            className="m-2 md:m-4 flex gap-2 md:flex-col items-center rounded-2xl bg-gray-900 p-4"
           >
             <img
               src={contributor.avatar}
               alt={contributor.name}
-              className="h-24 w-24 rounded-full"
+              className="h-4 w-4 rounded-full md:h-24 md:w-24"
             />
-            <p className="text-white">{contributor.name}</p>
+            <p className="text-white text-sm ">{contributor.name}</p>
           </div>
         ))}
       </div>
