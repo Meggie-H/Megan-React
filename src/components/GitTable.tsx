@@ -6,8 +6,8 @@ import { useParams } from '@tanstack/react-router';
 import { RouteParams } from '../models';
 
 function GitTable() {
-  const {username, repo} : RouteParams = useParams({ strict: false });
-  
+  const { username, repo }: RouteParams = useParams({ strict: false });
+
   const {
     data: commitData,
     isLoading,
@@ -19,10 +19,10 @@ function GitTable() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-gray-950 p-4 w-screen h-screen">
-        <div className="skeleton w-full h-full md:w-5/6 bg-gray-900"></div>
+      <div className="flex h-screen w-screen flex-col items-center rounded-2xl bg-gray-950 p-4">
+        <div className="skeleton h-full w-full bg-gray-900 md:w-5/6"></div>
       </div>
-    )
+    );
   }
 
   if (isError) {

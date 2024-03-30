@@ -6,7 +6,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { RouteParams } from '../models';
 
 const LanguageGraph = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const LanguagesStatsQuery = useQuery({
     queryKey: [`getLanguageStats`, username, repo],
@@ -29,16 +29,16 @@ const LanguageGraph = () => {
     plugins: {
       legend: {
         labels: {
-          color: '#edf2f7', 
+          color: '#edf2f7',
         },
       },
     },
   };
 
   if (LanguagesStatsQuery.isLoading) {
-    <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-      <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
-    </div>
+    <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
+      <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
+    </div>;
   }
 
   if (LanguagesStatsQuery.isError) {
@@ -48,7 +48,7 @@ const LanguageGraph = () => {
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
       <h2 className="width-full text-gray-200">Languages</h2>
-      <Doughnut data={data} options={chartOptions}/>
+      <Doughnut data={data} options={chartOptions} />
     </div>
   );
 };

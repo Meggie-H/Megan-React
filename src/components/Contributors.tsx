@@ -5,7 +5,7 @@ import { getContributors } from '../services/StatsAPI';
 import { IContributor, RouteParams } from '../models';
 
 const Contributors = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
     queryKey: [`getContributors`, username, repo],
@@ -14,10 +14,10 @@ const Contributors = () => {
 
   if (ContributorQuery.isLoading) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-gray-950 p-4 w-screen h-48">
-        <div className="skeleton w-full h-full bg-gray-800"></div>
+      <div className="flex h-48 w-screen flex-col items-center rounded-2xl bg-gray-950 p-4">
+        <div className="skeleton h-full w-full bg-gray-800"></div>
       </div>
-    )
+    );
   }
 
   if (ContributorQuery.isError) {
@@ -26,18 +26,18 @@ const Contributors = () => {
 
   return (
     <div className="bg-gray-950">
-      <div className="flex flex-wrap justify-left">
+      <div className="justify-left flex flex-wrap">
         {ContributorQuery.data?.map((contributor: IContributor) => (
           <div
             key={contributor.name}
-            className="m-2 md:m-4 flex gap-2 md:flex-col items-center rounded-2xl bg-gray-900 p-4"
+            className="m-2 flex items-center gap-2 rounded-2xl bg-gray-900 p-4 md:m-4 md:flex-col"
           >
             <img
               src={contributor.avatar}
               alt={`${contributor.name} profile picture`}
               className="h-4 w-4 rounded-full md:h-24 md:w-24"
             />
-            <p className="text-white text-sm ">{contributor.name}</p>
+            <p className="text-sm text-white ">{contributor.name}</p>
           </div>
         ))}
       </div>

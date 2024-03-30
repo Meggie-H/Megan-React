@@ -6,7 +6,7 @@ import { IContributor, RouteParams } from '../models';
 import { PolarArea } from 'react-chartjs-2';
 
 const CommitGraph = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
     queryKey: [`getContributors`, username, repo],
@@ -44,7 +44,7 @@ const CommitGraph = () => {
     plugins: {
       legend: {
         labels: {
-          color: '#edf2f7', 
+          color: '#edf2f7',
         },
       },
     },
@@ -52,10 +52,10 @@ const CommitGraph = () => {
 
   if (ContributorQuery.isLoading) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-        <div className="skeleton w-full h-full bg-gray-800"></div>
+      <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
+        <div className="skeleton h-full w-full bg-gray-800"></div>
       </div>
-    )
+    );
   }
 
   if (ContributorQuery.isError) {
@@ -63,10 +63,10 @@ const CommitGraph = () => {
   }
 
   return (
-    <div className="flex flex-col items-center h-full rounded-2xl bg-gray-900 p-4">
+    <div className="flex h-full flex-col items-center rounded-2xl bg-gray-900 p-4">
       <h2 className="width-full text-gray-200">Commits</h2>
-      <div className='flex justify-center h-full w-full'>
-         <PolarArea data={chartData} options={chartOptions} />
+      <div className="flex h-full w-full justify-center">
+        <PolarArea data={chartData} options={chartOptions} />
       </div>
     </div>
   );

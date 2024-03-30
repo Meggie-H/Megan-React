@@ -8,9 +8,7 @@ const router = createRouter({
   defaultNotFoundComponent: NotFoundPage,
 });
 
-declare module "@tanstack/react-router" {
-
-}
+declare module '@tanstack/react-router' {}
 
 const App = () => {
   return <RouterProvider router={router} />;

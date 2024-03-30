@@ -9,7 +9,7 @@ import { RouteParams } from '../models';
 const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const OpenIssueQuery = useQuery({
     queryKey: [`getOpenIssueCount`, username, repo],
@@ -41,13 +41,13 @@ const IssueGraph = () => {
           color: 'rgba(255, 255, 255, 0.1)',
         },
         ticks: {
-          color: '#edf2f7', 
+          color: '#edf2f7',
         },
       },
       y: {
         beginAtZero: true,
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)', 
+          color: 'rgba(255, 255, 255, 0.1)',
         },
         ticks: {
           color: '#edf2f7',
@@ -64,13 +64,13 @@ const IssueGraph = () => {
   };
 
   if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
-    <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-      <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
-    </div>
+    <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
+      <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
+    </div>;
   }
 
   if (OpenIssueQuery.isError || ClosedIssueQuery.isError) {
-    return <div>Error fetching issue data</div>
+    return <div>Error fetching issue data</div>;
   }
 
   return (

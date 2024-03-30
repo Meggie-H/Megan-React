@@ -8,7 +8,7 @@ import { RouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
-  const { username } : RouteParams = useParams({ strict: false });
+  const { username }: RouteParams = useParams({ strict: false });
   const RepoQuery = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
@@ -16,10 +16,10 @@ const PickRepoList = () => {
 
   if (RepoQuery.isLoading) {
     return (
-      <div className='flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4'>
-        <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
+      <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
+        <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
       </div>
-    )
+    );
   }
 
   if (RepoQuery.isError) {
@@ -27,7 +27,7 @@ const PickRepoList = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-950 p-4 min-h-screen">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 p-4">
       <div className="w-full overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6">
         <h1 className="py-4 text-center text-2xl font-bold text-gray-200">
           Pick a Repository
