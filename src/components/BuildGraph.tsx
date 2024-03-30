@@ -24,11 +24,19 @@ const BuildGraph = () => {
         ],
         backgroundColor: ['red', 'green'],
         borderColor: 'transparent',
-        borderWidth: 1,
       },
     ],
   };
 
+  const chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7', 
+        },
+      },
+    },
+  };
   if (BuildStatsQuery.isLoading) {
     return (
       <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
@@ -43,8 +51,8 @@ const BuildGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-full">Builds</h2>
-      <Doughnut data={data} />
+      <h2 className="width-full text-gray-200">Builds</h2>
+      <Doughnut data={data} options={chartOptions} />
     </div>
   );
 };

@@ -32,7 +32,7 @@ const UserForm = () => {
       </div>
 
       <div className="w-full">
-        <h2 className="text-md item-left mb-1">Enter you Github username:</h2>
+        <h2 className="text-md item-left mb-1 text-gray-200">Enter you Github username:</h2>
         <div className="mb-4 w-full">
           <form.Field
             name="userName"
@@ -50,13 +50,13 @@ const UserForm = () => {
               },
             }}
             children={(field) => (
-              <div className="flex flex-col">
+              <div className="flex flex-col text-gray-400">
                 <input
                   name={field.name}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  className="rounded-md border border-gray-800 bg-gray-900 p-4 focus:outline-none focus:ring focus:ring-blue-300"
+                  className="rounded-md border border-gray-800 bg-gray-900 p-4 focus:outline-none focus:text-gray-200 focus:ring focus:ring-blue-300"
                 />
                 {field.state.meta.errors ? (
                   <em className="text-purple-500" role="alert">

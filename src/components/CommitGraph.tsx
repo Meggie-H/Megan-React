@@ -35,8 +35,19 @@ const CommitGraph = () => {
           'rgba(75, 192, 192, 0.6)',
           'rgba(153, 102, 255, 0.6)',
         ],
+        borderColor: 'transparent',
       },
     ],
+  };
+
+  const chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7', 
+        },
+      },
+    },
   };
 
   if (ContributorQuery.isLoading) {
@@ -52,8 +63,9 @@ const CommitGraph = () => {
   }
 
   return (
-    <div className="rounded-2xl bg-gray-900 p-4">
-      <PolarArea data={chartData} />
+    <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
+      <h2 className="width-full text-gray-200">Commits</h2>
+      <PolarArea data={chartData} options={chartOptions} />
     </div>
   );
 };

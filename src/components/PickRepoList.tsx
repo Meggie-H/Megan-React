@@ -41,10 +41,10 @@ const PickRepoList = () => {
             <h2 className="w-full text-left text-lg text-gray-200">
               {repo.name}
             </h2>
-            <p className="text-md w-full pb-4 text-left italic">
+            <p className="text-md w-full pb-4 text-left italic text-gray-400">
               {repo.description}
             </p>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between text-gray-400">
               <div className="flex items-center">
                 <div
                   className="h-3 w-3 rounded-full"

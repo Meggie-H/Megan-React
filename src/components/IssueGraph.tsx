@@ -34,13 +34,35 @@ const IssueGraph = () => {
     ],
   };
 
-  const options = {
+  const chartOptions = {
     scales: {
+      x: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          color: '#edf2f7', 
+        },
+      },
       y: {
         beginAtZero: true,
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)', 
+        },
+        ticks: {
+          color: '#edf2f7',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7',
+        },
       },
     },
   };
+  
 
   if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
@@ -54,8 +76,8 @@ const IssueGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-full">Issues</h2>
-      <Bar data={data} options={options} />
+      <h2 className="width-ful text-gray-200">Issues</h2>
+      <Bar data={data} options={chartOptions} />
     </div>
   );
 };
