@@ -11,7 +11,7 @@ const StatsPage = () => {
             <div className="w-screen border-t border-gray-900 border-b"> 
                 <Contributors />
             </div>
-            <div className="w-full flex flex-col gap-4 p-4 md:grid md:grid-cols-2 lg:grid-cols-4">
+            <div className="w-full first-line:flex flex-col gap-4 p-4 md:grid md:grid-cols-2 lg:grid-cols-4">
                 <IssueGraph />
                 <BuildGraph />
                 <CommitGraph />

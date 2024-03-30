@@ -14,7 +14,7 @@ const Contributors = () => {
 
   if (ContributorQuery.isLoading) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
+      <div className="flex flex-col items-center rounded-2xl bg-gray-950 p-4 w-screen h-48">
         <div className="skeleton w-full h-full bg-gray-800"></div>
       </div>
     )

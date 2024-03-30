@@ -19,8 +19,8 @@ function GitTable() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-        <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
+      <div className="flex flex-col items-center rounded-2xl bg-gray-950 p-4 w-screen h-screen">
+        <div className="skeleton w-full h-full md:w-5/6 bg-gray-900"></div>
       </div>
     )
   }
