@@ -18,8 +18,8 @@ export interface IContributorResponse {
   type: string;
   site_admin: boolean;
   contributions: number;
-  email?: string;
-  name?: string;
+  email: string | null;
+  name: string | null;
 }
 
 export interface IContributor {
