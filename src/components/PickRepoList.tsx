@@ -27,7 +27,7 @@ const PickRepoList = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
+    <div className="flex flex-col items-center justify-center bg-gray-950 p-4 min-h-screen">
       <div className="w-full overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6">
         <h1 className="py-4 text-center text-2xl font-bold text-gray-200">
           Pick a Repository

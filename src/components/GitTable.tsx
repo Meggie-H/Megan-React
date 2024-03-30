@@ -60,7 +60,7 @@ function GitTable() {
           </div>
         ))}
       </div>
-      <div className="hidden overflow-hidden rounded-lg border border-gray-600 text-gray-300 md:w-5/6 lg:block">
+      <div className="hidden overflow-hidden rounded-lg border border-gray-600 text-gray-300  md:w-5/6 lg:block">
         <table className="w-full gap-4">
           <thead className="w-full bg-gray-900 ">
             <tr className="column border border-gray-600 ">
