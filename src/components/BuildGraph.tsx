@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from '@tanstack/react-router';
 import { getBuildStats } from '../services/StatsAPI';
 import { useQuery } from '@tanstack/react-query';

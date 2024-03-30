@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';

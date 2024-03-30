@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useParams } from '@tanstack/react-router';
 import CommitIcon from '@mui/icons-material/Commit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';

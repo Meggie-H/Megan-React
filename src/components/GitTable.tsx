@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCommits } from '../services/CommitsAPI';
 import { useQuery } from '@tanstack/react-query';
 import ReadMore from './ReadMore';

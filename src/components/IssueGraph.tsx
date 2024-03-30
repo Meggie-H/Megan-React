@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
