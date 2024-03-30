@@ -13,7 +13,11 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as UsernameDashboardImport } from './routes/$username.Dashboard'
+import { Route as UsernameReposImport } from './routes/$username.repos'
+import { Route as UsernameRepoDashboardImport } from './routes/$username.$repo.dashboard'
+import { Route as UsernameRepoDashboardStatsImport } from './routes/$username.$repo.dashboard.stats'
+import { Route as UsernameRepoDashboardGitTreeImport } from './routes/$username.$repo.dashboard.git-tree'
+import { Route as UsernameRepoDashboardCommitsImport } from './routes/$username.$repo.dashboard.commits'
 
 // Create Virtual Routes
 
@@ -26,10 +30,34 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const UsernameDashboardRoute = UsernameDashboardImport.update({
-  path: '/$username/Dashboard',
+const UsernameReposRoute = UsernameReposImport.update({
+  path: '/$username/repos',
   getParentRoute: () => rootRoute,
 } as any)
+
+const UsernameRepoDashboardRoute = UsernameRepoDashboardImport.update({
+  path: '/$username/$repo/dashboard',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const UsernameRepoDashboardStatsRoute = UsernameRepoDashboardStatsImport.update(
+  {
+    path: '/stats',
+    getParentRoute: () => UsernameRepoDashboardRoute,
+  } as any,
+)
+
+const UsernameRepoDashboardGitTreeRoute =
+  UsernameRepoDashboardGitTreeImport.update({
+    path: '/git-tree',
+    getParentRoute: () => UsernameRepoDashboardRoute,
+  } as any)
+
+const UsernameRepoDashboardCommitsRoute =
+  UsernameRepoDashboardCommitsImport.update({
+    path: '/commits',
+    getParentRoute: () => UsernameRepoDashboardRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -39,9 +67,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/$username/Dashboard': {
-      preLoaderRoute: typeof UsernameDashboardImport
+    '/$username/repos': {
+      preLoaderRoute: typeof UsernameReposImport
       parentRoute: typeof rootRoute
+    }
+    '/$username/$repo/dashboard': {
+      preLoaderRoute: typeof UsernameRepoDashboardImport
+      parentRoute: typeof rootRoute
+    }
+    '/$username/$repo/dashboard/commits': {
+      preLoaderRoute: typeof UsernameRepoDashboardCommitsImport
+      parentRoute: typeof UsernameRepoDashboardImport
+    }
+    '/$username/$repo/dashboard/git-tree': {
+      preLoaderRoute: typeof UsernameRepoDashboardGitTreeImport
+      parentRoute: typeof UsernameRepoDashboardImport
+    }
+    '/$username/$repo/dashboard/stats': {
+      preLoaderRoute: typeof UsernameRepoDashboardStatsImport
+      parentRoute: typeof UsernameRepoDashboardImport
     }
   }
 }
@@ -50,7 +94,12 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
-  UsernameDashboardRoute,
+  UsernameReposRoute,
+  UsernameRepoDashboardRoute.addChildren([
+    UsernameRepoDashboardCommitsRoute,
+    UsernameRepoDashboardGitTreeRoute,
+    UsernameRepoDashboardStatsRoute,
+  ]),
 ])
 
 /* prettier-ignore-end */

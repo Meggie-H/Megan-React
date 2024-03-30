@@ -1,12 +1,13 @@
-export interface ILanguage {
-    title: string;
-    description: string;
-    type: string;
-    additionalProperties: {
-    type: string;
-    };
+export interface ILanguageResponse {
+  [language: string]: number;
 }
 
 export interface ILanguageColors {
-    [key: string]: string;
-  }
+  [key: string]: string;
+}
+
+export interface ILanguage {
+  languages: string[];
+  colors: string[];
+  percentages: number[];
+}

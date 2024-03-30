@@ -1,32 +1,33 @@
+import React from 'react';
 import { Gitgraph } from '@gitgraph/react';
-import { getCommits } from '../services/apiService';
+import { getCommits } from '../services/CommitsAPI';
 import { ICommit } from '../models';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 
 // create an animation for the git graph
 function GitGraph() {
-  const { username } = useParams({ strict: false });
-  const { repo } = useParams({ strict: false });
+  // const { username } = useParams({ strict: false });
+  // const { repo } = useParams({ strict: false });
 
-  const {
-    data: commitData,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: [`getCommits`, username, repo],
-    queryFn: () => getCommits(username, repo),
-  });
+  // const {
+  //   data: commitData,
+  //   isLoading,
+  //   isError,
+  // } = useQuery({
+  //   queryKey: [`getCommits`, username, repo],
+  //   queryFn: () => getCommits(username, repo),
+  // });
 
-  let branches: Record<string, any> = {};
+  // let branches: Record<string, any> = {};
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (isError) {
-    return <div>Error fetching commit data</div>;
-  }
+  // if (isError) {
+  //   return <div>Error fetching commit data</div>;
+  // }
 
   return (
     <></>

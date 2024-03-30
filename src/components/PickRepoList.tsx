@@ -1,12 +1,14 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getRepos } from '../services/apiService';
+import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';
 import { ILanguageColors } from '../models';
 import { Link, useParams } from '@tanstack/react-router';
+import { RouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
-  const { username } = useParams({ strict: false });
+  const { username } : RouteParams = useParams({ strict: false });
   const RepoQuery = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
@@ -44,7 +46,7 @@ const PickRepoList = () => {
                   className="h-3 w-3 rounded-full"
                   style={{
                     backgroundColor:
-                      languageColorsData[repo.language] || 'gray',
+                      languageColorsData[repo.language] ?? 'gray',
                   }}
                 ></div>
                 <p className="pl-1 text-left text-sm">{repo.language}</p>
