@@ -15,7 +15,8 @@ const UserForm = () => {
   });
 
   return (
-    <form
+    <div className='h-screen w-screen bg-gray-800 flex items-center justify-center'>
+<form
       onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -76,6 +77,7 @@ const UserForm = () => {
         </button>
       </div>
     </form>
+    </div>
   );
 };
 
