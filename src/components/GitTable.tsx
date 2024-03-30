@@ -20,7 +20,7 @@ function GitTable() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-        <div className="skeleton w-full h-full md:w-4/6"></div>
+        <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
       </div>
     )
   }
@@ -42,7 +42,7 @@ function GitTable() {
               <div className="align-center flex">
                 <img
                   src={commit.author?.avatar_url}
-                  alt="Avatar"
+                  alt={`${commit.author?.login} profile picture`}
                   className="mr-2 h-6 w-6 rounded-full"
                 />
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>

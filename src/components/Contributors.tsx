@@ -15,7 +15,7 @@ const Contributors = () => {
   if (ContributorQuery.isLoading) {
     return (
       <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-        <div className="skeleton w-full h-full"></div>
+        <div className="skeleton w-full h-full bg-gray-800"></div>
       </div>
     )
   }
@@ -34,7 +34,7 @@ const Contributors = () => {
           >
             <img
               src={contributor.avatar}
-              alt={contributor.name}
+              alt={`${contributor.name} profile picture`}
               className="h-4 w-4 rounded-full md:h-24 md:w-24"
             />
             <p className="text-white text-sm ">{contributor.name}</p>

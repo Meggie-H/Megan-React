@@ -27,6 +27,7 @@ const UserForm = () => {
         <img
           className="h-24 w-24"
           src="https://assets-global.website-files.com/61d1b6e84887f53fef1dcdf2/631b45e07d98cfb364e5951f_github-white.png"
+          alt="GitHub Logo"
         />
         <h1 className="mt-1 text-center text-3xl text-white">GitGo</h1>
       </div>

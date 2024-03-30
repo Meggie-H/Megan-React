@@ -62,11 +62,10 @@ const IssueGraph = () => {
       },
     },
   };
-  
 
   if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
-      <div className="skeleton w-full h-full md:w-4/6"></div>
+      <div className="skeleton w-full h-full md:w-4/6 bg-gray-800"></div>
     </div>
   }
 

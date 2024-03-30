@@ -17,6 +17,7 @@ const Navbar = () => {
               <img
                 className="h-8 w-8"
                 src="https://assets-global.website-files.com/61d1b6e84887f53fef1dcdf2/631b45e07d98cfb364e5951f_github-white.png"
+                alt='GitHub Logo'
               />
             </Link>
           </li>
