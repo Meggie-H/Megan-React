@@ -12,6 +12,18 @@ const Contributors = () => {
     queryFn: () => getContributors(username, repo),
   });
 
+  if (ContributorQuery.isLoading) {
+    return (
+      <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
+        <div className="skeleton w-full h-full"></div>
+      </div>
+    )
+  }
+
+  if (ContributorQuery.isError) {
+    return <div>Error fetching commit data</div>;
+  }
+
   return (
     <div className="bg-gray-950">
       <h2 className="text-white">Contributors</h2>

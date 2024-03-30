@@ -15,7 +15,11 @@ const PickRepoList = () => {
   });
 
   if (RepoQuery.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className='flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4'>
+        <div className="skeleton w-full h-full md:w-4/6"></div>
+      </div>
+    )
   }
 
   if (RepoQuery.isError) {

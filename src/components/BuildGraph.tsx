@@ -30,7 +30,11 @@ const BuildGraph = () => {
   };
 
   if (BuildStatsQuery.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4 w-full h-full">
+        <div className="skeleton w-full h-full"></div>
+      </div>
+    )
   }
 
   if (BuildStatsQuery.isError) {
