@@ -7,7 +7,9 @@ import { RouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
+
   const { username } : RouteParams = useParams({ strict: false });
+  
   const RepoQuery = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
