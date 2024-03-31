@@ -1,8 +1,7 @@
-import React from 'react';
-import { Outlet, createFileRoute } from '@tanstack/react-router';
-import Navbar from '../components/Navbar';
+import { Outlet, createFileRoute } from '@tanstack/react-router'
+import Navbar from '../../components/Navbar'
 
-export const Route = createFileRoute('/$username/$repo/dashboard')({
+export const Route = createFileRoute('/_authenticated/$username/$repo/dashboard')({
   component: () => (
     <>
       <div className="min-h-screen bg-gray-950">
@@ -13,4 +12,4 @@ export const Route = createFileRoute('/$username/$repo/dashboard')({
       </div>
     </>
   ),
-});
+})

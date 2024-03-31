@@ -1,15 +1,24 @@
-import React from 'react';
 import { useForm } from '@tanstack/react-form';
 import { getUser } from '../services/UserAPI';
 import { useNavigate } from '@tanstack/react-router';
+import { useAuth } from '../hooks/useAuth';
+import { useEffect } from 'react';
 
 const UserForm = () => {
   const navigate = useNavigate({ from: '/' });
+  const { signIn, signOut } = useAuth();
+
+  useEffect(() => {
+    signOut();
+  }
+  , []);
+
   const form = useForm({
     defaultValues: {
       userName: '',
     },
     onSubmit: async ({ value }) => {
+      signIn();
       navigate({ to: `${value.userName}/repos` });
     },
   });

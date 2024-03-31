@@ -1,24 +1,16 @@
 import { useState } from 'react'
 
 export const useAuth = () => {
-    const [user, setUser] = useState<string | null>(null);
-
-    const isAuthenticated = user !== null;
-
-    const login = (username: string) => {
-        setUser(username);
+    const signIn = () => {
+        localStorage.setItem('isAuthenticated', 'true');
     };
-
-    const logout = () => {
-        setUser(null);
+    const signOut = () => {
+        localStorage.setItem('isAuthenticated', 'false');
     };
-
-    return {
-        user,
-        isAuthenticated,
-        login,
-        logout
+    const isAuthenticated = () => {
+        return localStorage.getItem('isAuthenticated') === 'true';
     };
+    return { signIn, signOut, isAuthenticated };
 }
 
 export type AuthContext = ReturnType<typeof useAuth>;
