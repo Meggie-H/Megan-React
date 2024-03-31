@@ -1,8 +1,8 @@
-import IssueGraph from './IssueGraph';
-import BuildGraph from './BuildGraph';
-import Contributors from './Contributors';
-import CommitGraph from './CommitGraph';
-import LanguageGraph from './LanguageGraph';
+import { IssueGraph } from '../components';
+import { BuildGraph } from '../components';
+import { Contributors } from '../components';
+import { CommitGraph } from '../components';
+import { LanguageGraph } from '../components';
 
 const StatsPage = () => {
   return (

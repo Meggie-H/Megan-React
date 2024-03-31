@@ -1,4 +1,3 @@
-
 // create an animation for the git graph
 function GitGraph() {
   // const { username } = useParams({ strict: false });

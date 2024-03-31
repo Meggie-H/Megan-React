@@ -8,4 +8,3 @@ type RouterContext = {
 export const Route = createRootRouteWithContext<RouterContext>()({
   component: Outlet,
 });
-

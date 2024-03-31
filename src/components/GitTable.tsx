@@ -4,7 +4,7 @@ import ReadMore from './ReadMore';
 import { useParams } from '@tanstack/react-router';
 import { RouteParams } from '../models';
 
-function GitTable() {
+export function GitTable() {
   const { username, repo }: RouteParams = useParams({ strict: false });
 
   const {
@@ -47,10 +47,10 @@ function GitTable() {
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
               </div>
               <div className="flex gap-2">
-                <div className="badge badge-primary text-xs md:text-sm badge-outline">
+                <div className="badge badge-primary badge-outline text-xs md:text-sm">
                   {commit.date}
                 </div>
-                <div className="badge badge-secondary text-xs md:text-sm badge-outline">
+                <div className="badge badge-secondary badge-outline text-xs md:text-sm">
                   {commit.id}
                 </div>
               </div>
@@ -97,5 +97,3 @@ function GitTable() {
     </>
   );
 }
-
-export default GitTable;

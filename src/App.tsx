@@ -1,6 +1,6 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen';
-import NotFoundPage from './components/NotFoundPage';
+import NotFoundPage from './pages/NotFoundPage';
 import { useAuth } from './hooks/useAuth';
 
 const router = createRouter({
@@ -11,11 +11,10 @@ const router = createRouter({
   },
 });
 
-declare module '@tanstack/react-router' {
-  }
+declare module '@tanstack/react-router' {}
 
 const App = () => {
   const authentication = useAuth();
-  return <RouterProvider router={router} context={{authentication}}/>;
+  return <RouterProvider router={router} context={{ authentication }} />;
 };
 export default App;

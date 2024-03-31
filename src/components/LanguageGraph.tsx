@@ -4,7 +4,7 @@ import { getLanguageStats } from '../services/StatsAPI';
 import { Doughnut } from 'react-chartjs-2';
 import { RouteParams } from '../models';
 
-const LanguageGraph = () => {
+export const LanguageGraph = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
 
   const LanguagesStatsQuery = useQuery({
@@ -51,5 +51,3 @@ const LanguageGraph = () => {
     </div>
   );
 };
-
-export default LanguageGraph;

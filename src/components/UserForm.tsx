@@ -10,8 +10,7 @@ const UserForm = () => {
 
   useEffect(() => {
     signOut();
-  }
-  , []);
+  }, []);
 
   const form = useForm({
     defaultValues: {

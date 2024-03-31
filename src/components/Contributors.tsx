@@ -3,7 +3,7 @@ import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
 import { IContributor, RouteParams } from '../models';
 
-const Contributors = () => {
+export const Contributors = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
@@ -43,5 +43,3 @@ const Contributors = () => {
     </div>
   );
 };
-
-export default Contributors;

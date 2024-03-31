@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Doughnut } from 'react-chartjs-2';
 import { RouteParams } from '../models';
 
-const BuildGraph = () => {
+export const BuildGraph = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
 
   const BuildStatsQuery = useQuery({
@@ -56,5 +56,3 @@ const BuildGraph = () => {
     </div>
   );
 };
-
-export default BuildGraph;

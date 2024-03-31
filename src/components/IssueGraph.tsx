@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
 import { RouteParams } from '../models';
 
-const IssueGraph = () => {
+export const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
   const { username, repo }: RouteParams = useParams({ strict: false });
@@ -79,5 +79,3 @@ const IssueGraph = () => {
     </div>
   );
 };
-
-export default IssueGraph;

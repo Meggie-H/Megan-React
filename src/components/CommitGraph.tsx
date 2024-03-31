@@ -4,7 +4,7 @@ import { getContributors } from '../services/StatsAPI';
 import { IContributor, RouteParams } from '../models';
 import { PolarArea } from 'react-chartjs-2';
 
-const CommitGraph = () => {
+export const CommitGraph = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
@@ -70,5 +70,3 @@ const CommitGraph = () => {
     </div>
   );
 };
-
-export default CommitGraph;
