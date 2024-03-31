@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';
@@ -34,7 +33,7 @@ const PickRepoList = () => {
         </h1>
         {RepoQuery.data?.map((repo) => (
           <Link
-            to={`/${username}/${repo.name}/dashboard`}
+            to={`/${username}/${repo.name}/dashboard/stats`}
             key={repo.id}
             className="flex w-full transform flex-col items-center border-b border-t border-gray-800 bg-gray-950 p-4 transition-transform duration-300 hover:scale-[1.01] hover:cursor-pointer hover:bg-gray-800"
           >

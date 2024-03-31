@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCommits } from '../services/CommitsAPI';
 import { useQuery } from '@tanstack/react-query';
 import ReadMore from './ReadMore';
@@ -48,10 +47,10 @@ function GitTable() {
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
               </div>
               <div className="flex gap-2">
-                <div className="badge badge-primary badge-outline">
+                <div className="badge badge-primary text-xs md:text-sm badge-outline">
                   {commit.date}
                 </div>
-                <div className="badge badge-secondary badge-outline">
+                <div className="badge badge-secondary text-xs md:text-sm badge-outline">
                   {commit.id}
                 </div>
               </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useParams } from '@tanstack/react-router';
 import CommitIcon from '@mui/icons-material/Commit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -29,6 +28,13 @@ const Navbar = () => {
       </div>
       <div className="mt-2 flex gap-8 text-lg">
         <Link
+            to="stats"
+            className="flex items-center gap-1 pb-2 text-gray-400 [&.active]:border-b-2 [&.active]:border-orange-400"
+          >
+          <QueryStatsIcon />
+          <h2 className="text-gray-200">Stats</h2>
+        </Link>
+        <Link
           to="commits"
           className="flex h-full  items-center gap-1 pb-2 text-gray-500 [&.active]:border-b-2 [&.active]:border-orange-400"
         >
@@ -41,13 +47,6 @@ const Navbar = () => {
         >
           <AccountTreeIcon />
           <h2 className="text-gray-200">Git Tree</h2>
-        </Link>
-        <Link
-          to="stats"
-          className="flex items-center gap-1 pb-2 text-gray-400 [&.active]:border-b-2 [&.active]:border-orange-400"
-        >
-          <QueryStatsIcon />
-          <h2 className="text-gray-200">Stats</h2>
         </Link>
       </div>
     </div>

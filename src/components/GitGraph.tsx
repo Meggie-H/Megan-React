@@ -1,9 +1,3 @@
-import React from 'react';
-import { Gitgraph } from '@gitgraph/react';
-import { getCommits } from '../services/CommitsAPI';
-import { ICommit } from '../models';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from '@tanstack/react-router';
 
 // create an animation for the git graph
 function GitGraph() {

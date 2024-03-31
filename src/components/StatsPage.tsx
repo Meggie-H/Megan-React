@@ -1,4 +1,3 @@
-import React from 'react';
 import IssueGraph from './IssueGraph';
 import BuildGraph from './BuildGraph';
 import Contributors from './Contributors';

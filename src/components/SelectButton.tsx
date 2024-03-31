@@ -1,4 +1,3 @@
-import React from 'react';
 const SelectButton = () => {
   return (
     <div className="flex items-center justify-center">
