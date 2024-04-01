@@ -5,6 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
 import { RouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
@@ -64,9 +65,7 @@ const IssueGraph = () => {
   };
 
   if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
-    <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
-    </div>;
+    <StatsSkeleton />;
   }
 
   if (OpenIssueQuery.isError || ClosedIssueQuery.isError) {

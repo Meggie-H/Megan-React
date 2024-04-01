@@ -4,6 +4,7 @@ import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
 import { IContributor, RouteParams } from '../models';
 import { PolarArea } from 'react-chartjs-2';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const CommitGraph = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
@@ -52,9 +53,7 @@ const CommitGraph = () => {
 
   if (ContributorQuery.isLoading) {
     return (
-      <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
-        <div className="skeleton h-full w-full bg-gray-800"></div>
-      </div>
+      StatsSkeleton
     );
   }
 

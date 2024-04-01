@@ -4,6 +4,7 @@ import { getBuildStats } from '../services/StatsAPI';
 import { useQuery } from '@tanstack/react-query';
 import { Doughnut } from 'react-chartjs-2';
 import { RouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const BuildGraph = () => {
   const { username, repo }: RouteParams = useParams({ strict: false });
@@ -40,9 +41,7 @@ const BuildGraph = () => {
 
   if (BuildStatsQuery.isLoading) {
     return (
-      <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
-        <div className="skeleton h-full w-full bg-gray-800"></div>
-      </div>
+      <StatsSkeleton />
     );
   }
 
