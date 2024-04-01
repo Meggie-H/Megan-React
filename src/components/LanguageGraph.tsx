@@ -36,7 +36,7 @@ export const LanguageGraph = () => {
   };
 
   if (LanguagesStatsQuery.isLoading) {
-   <StatsSkeleton/>
+    <StatsSkeleton />;
   }
 
   if (LanguagesStatsQuery.isError) {

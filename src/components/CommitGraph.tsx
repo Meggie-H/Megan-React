@@ -53,9 +53,7 @@ export const CommitGraph = () => {
   };
 
   if (ContributorQuery.isLoading) {
-    return (
-      <StatsSkeleton/>
-    );
+    return <StatsSkeleton />;
   }
 
   if (ContributorQuery.isError) {

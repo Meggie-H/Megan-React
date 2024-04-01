@@ -1,8 +1,5 @@
 import { octokit } from '../../environments/apiKey';
-import {
-  IRepositoryResponse,
-  IRepository,
-} from '../models';
+import { IRepositoryResponse, IRepository } from '../models';
 import { format } from 'date-fns';
 
 const baseUrl: string = `https://api.github.com/`;

@@ -39,9 +39,7 @@ export const BuildGraph = () => {
   };
 
   if (BuildStatsQuery.isLoading) {
-    return (
-      <StatsSkeleton />
-    );
+    return <StatsSkeleton />;
   }
 
   if (BuildStatsQuery.isError) {

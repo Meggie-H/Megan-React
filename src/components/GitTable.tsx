@@ -41,7 +41,7 @@ export function GitTable() {
               <div className="align-center flex">
                 <img
                   src={commit.author?.avatar_url}
-                  alt={`${commit.author?.login ?? "User"} profile picture`}
+                  alt={`${commit.author?.login ?? 'User'} profile picture`}
                   className="mr-2 h-6 w-6 rounded-full"
                 />
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
