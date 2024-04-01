@@ -12,7 +12,7 @@ export interface ICommitResponse {
   files: Files[];
 }
 
-interface CommitData {
+interface ICommitData {
   url: string;
   author: Author | null;
   committer: Committer | null;
@@ -21,85 +21,27 @@ interface CommitData {
   tree: Tree | null;
 }
 
-interface Author {
+interface ICommitter {
   name: string;
   email: string;
   date: string;
 }
 
-interface Committer {
-  name: string;
-  email: string;
-  date: string;
-}
-
-interface Tree {
-  sha: string;
-  url: string;
-}
-
-interface Verification {
-  verified: boolean;
-  reason: string;
-  payload: string | null;
-  signature: string | null;
-}
-
-interface Author {
+interface IAuthor {
   name: string | null;
   email: string | null;
   login: string;
   id: number;
-  node_id: string;
   avatar_url: string;
-  gravatar_id: string | null;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
-  type: string;
-  site_admin: boolean;
-  starred_at: string;
 }
 
-interface CommitterMain {
-  name: string | null;
-  email: string | null;
-  login: string;
-  id: number;
-  node_id: string;
-  avatar_url: string;
-  gravatar_id: string | null;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
-  type: string;
-  site_admin: boolean;
-  starred_at: string;
-}
-
-interface Parents {
+interface IParents {
   sha: string;
   url: string;
   html_url: string;
 }
 
-interface Stats {
+interface IStats {
   additions: number;
   deletions: number;
   total: number;

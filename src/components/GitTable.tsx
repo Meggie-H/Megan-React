@@ -2,10 +2,10 @@ import { getCommits } from '../services/CommitsAPI';
 import { useQuery } from '@tanstack/react-query';
 import ReadMore from './ReadMore';
 import { useParams } from '@tanstack/react-router';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 
 export function GitTable() {
-  const { username, repo }: RouteParams = useParams({ strict: false });
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
   const {
     data: commitData,

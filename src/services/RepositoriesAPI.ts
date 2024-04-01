@@ -1,7 +1,6 @@
 import { octokit } from '../../environments/apiKey';
 import {
   IRepositoryResponse,
-  IOrganisationResponse,
   IRepository,
 } from '../models';
 import { format } from 'date-fns';
@@ -48,22 +47,4 @@ function processRepository(repo: IRepositoryResponse): IRepository {
   };
 
   return repository;
-}
-
-export async function getOrgs(owner: string): Promise<IOrganisationResponse[]> {
-  try {
-    const response = await octokit.request<IOrganisationResponse[]>({
-      method: 'GET',
-      url: `${baseUrl}users/${owner}/orgs`,
-    });
-    if (response.status !== 200) {
-      throw new Error(`Failed to fetch organisations for username ${owner}`);
-    }
-
-    const orgData: IOrganisationResponse[] = response.data;
-    return orgData;
-  } catch (error) {
-    console.error('Error fetching organisations:', error);
-    throw error;
-  }
 }

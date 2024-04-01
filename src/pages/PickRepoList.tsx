@@ -3,11 +3,11 @@ import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';
 import { ILanguageColors } from '../models';
 import { Link, useParams } from '@tanstack/react-router';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
-  const { username }: RouteParams = useParams({ strict: false });
+  const { username }: IRouteParams = useParams({ strict: false });
   const RepoQuery = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),

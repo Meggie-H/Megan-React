@@ -2,11 +2,11 @@ import { Link, useParams } from '@tanstack/react-router';
 import CommitIcon from '@mui/icons-material/Commit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
-  const { username, repo }: RouteParams = useParams({ strict: false });
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
   return (
     <div className="w-screen border-b border-gray-600 bg-black px-4 pb-0 text-gray-400">

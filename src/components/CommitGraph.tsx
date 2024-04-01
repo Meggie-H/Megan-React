@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
-import { IContributor, RouteParams } from '../models';
+import { IContributor, IRouteParams } from '../models';
 import { PolarArea } from 'react-chartjs-2';
 
 export const CommitGraph = () => {
-  const { username, repo }: RouteParams = useParams({ strict: false });
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
     queryKey: [`getContributors`, username, repo],
