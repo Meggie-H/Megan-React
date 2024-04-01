@@ -31,7 +31,7 @@ export function GitTable() {
   return (
     <>
       <div className="m-4 block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden">
-        <h2 className="w-full py-4 text-center">Commit data</h2>
+        <h2 className="py-4 text-center">Commit data</h2>
         {commitData?.map((commit) => (
           <div
             key={commit.id}
