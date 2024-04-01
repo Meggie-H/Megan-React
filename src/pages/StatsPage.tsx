@@ -11,10 +11,16 @@ const StatsPage = () => {
         <Contributors />
       </div>
       <div className="flex w-full h-full flex-col gap-4 p-4 md:grid md:grid-cols-2 lg:grid-cols-4">
-        <IssueGraph />
-        <BuildGraph />
-        <CommitGraph />
-        <LanguageGraph />
+
+      </div>
+      <div className="m-4 overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6">
+        <h2 className="w-full py-4 text-center">Commit data</h2>
+        <div className="w-full bg-gray-950 grid grid-cols-2 gap-12">
+          <IssueGraph />
+          <BuildGraph />
+          <CommitGraph />
+          <LanguageGraph />
+        </div>
       </div>
     </div>
   );

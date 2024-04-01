@@ -54,7 +54,7 @@ export const IssueGraph = () => {
   }
 
   return (
-    <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
+    <div className="flex flex-col items-center border border-gray-800 p-4">
       <h2 className="text-gray-200">Issues</h2>
       <Pie data={data} options={chartOptions} />
     </div>
