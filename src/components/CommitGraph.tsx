@@ -54,7 +54,7 @@ export const CommitGraph = () => {
 
   if (ContributorQuery.isLoading) {
     return (
-      StatsSkeleton
+      <StatsSkeleton/>
     );
   }
 
