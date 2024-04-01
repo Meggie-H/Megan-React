@@ -21,7 +21,7 @@ export const BuildGraph = () => {
           BuildStatsQuery.data?.failures ?? 0,
           BuildStatsQuery.data?.successes ?? 0,
         ],
-        backgroundColor: ['red', 'green'],
+        backgroundColor: ['#800020', '#228B22'],
         borderColor: 'transparent',
       },
     ],

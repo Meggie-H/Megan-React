@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
-import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
 import { RouteParams } from '../models';
 
@@ -26,7 +26,7 @@ export const IssueGraph = () => {
       {
         label: 'Issues',
         data: [OpenIssueQuery.data, ClosedIssueQuery.data],
-        backgroundColor: ['red', 'green'],
+        backgroundColor: ['#33A0BF', '#4B0082'],
         borderColor: 'transparent',
         borderWidth: 1,
       },
@@ -34,25 +34,6 @@ export const IssueGraph = () => {
   };
 
   const chartOptions = {
-    scales: {
-      x: {
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          color: '#edf2f7',
-        },
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          color: '#edf2f7',
-        },
-      },
-    },
     plugins: {
       legend: {
         labels: {
@@ -74,8 +55,8 @@ export const IssueGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-ful text-gray-200">Issues</h2>
-      <Bar data={data} options={chartOptions} />
+      <h2 className="text-gray-200">Issues</h2>
+      <Pie data={data} options={chartOptions} />
     </div>
   );
 };
