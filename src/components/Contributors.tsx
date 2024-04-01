@@ -34,7 +34,7 @@ export const Contributors = () => {
             <img
               src={contributor.avatar}
               alt={`${contributor.name} profile picture`}
-              className="h-4 w-4 rounded-full md:h-24 md:w-24"
+              className="h-6 w-6 rounded-full md:h-24 md:w-24"
             />
             <p className="text-sm text-white ">{contributor.name}</p>
           </div>

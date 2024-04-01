@@ -16,7 +16,7 @@ export const Route = createFileRoute(
       >
         <div className="min-h-screen bg-gray-950">
           <Navbar />
-          <div className="flex items-center justify-center pt-6">
+          <div className="flex items-center w-screen justify-center pt-6">
             <Outlet />
           </div>
         </div>

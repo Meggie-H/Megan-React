@@ -49,7 +49,7 @@ export const BuildGraph = () => {
   }
 
   return (
-    <div className="flex flex-col items-center border border-gray-800 rounded-2xl p-4">
+    <div className="flex flex-col items-center border border-gray-800 p-4">
       <h2 className="text-gray-200">Builds</h2>
       <Doughnut data={data} options={chartOptions} />
     </div>
