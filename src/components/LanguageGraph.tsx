@@ -3,6 +3,7 @@ import { useParams } from '@tanstack/react-router';
 import { getLanguageStats } from '../services/StatsAPI';
 import { Doughnut } from 'react-chartjs-2';
 import { IRouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 export const LanguageGraph = () => {
   const { username, repo }: IRouteParams = useParams({ strict: false });
@@ -35,9 +36,7 @@ export const LanguageGraph = () => {
   };
 
   if (LanguagesStatsQuery.isLoading) {
-    <div className="flex h-full w-full flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
-    </div>;
+   <StatsSkeleton/>
   }
 
   if (LanguagesStatsQuery.isError) {

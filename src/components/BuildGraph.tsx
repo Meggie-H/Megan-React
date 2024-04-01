@@ -3,6 +3,7 @@ import { getBuildStats } from '../services/StatsAPI';
 import { useQuery } from '@tanstack/react-query';
 import { Doughnut } from 'react-chartjs-2';
 import { IRouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 export const BuildGraph = () => {
   const { username, repo }: IRouteParams = useParams({ strict: false });
@@ -39,9 +40,7 @@ export const BuildGraph = () => {
 
   if (BuildStatsQuery.isLoading) {
     return (
-      <div className="flex h-full w-full flex-col items-center border bg-gray-900 p-4">
-        <div className="skeleton h-full w-full bg-gray-800"></div>
-      </div>
+      <StatsSkeleton />
     );
   }
 
