@@ -19,7 +19,7 @@ async function makeApiRequest<T>(url: string): Promise<T> {
     const response = await octokit.request<T>({
       method: 'GET',
       url: url,
-    })
+    });
     if (response.status !== 200) {
       throw new Error(`Request failed with status ${response.status}`);
     }

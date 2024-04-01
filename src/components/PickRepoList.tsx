@@ -8,14 +8,18 @@ import { RouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
-  const { username } : RouteParams = useParams({ strict: false });
+  const { username }: RouteParams = useParams({ strict: false });
   const RepoQuery = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
   });
 
   if (RepoQuery.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
+        <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
+      </div>
+    );
   }
 
   if (RepoQuery.isError) {
@@ -23,7 +27,7 @@ const PickRepoList = () => {
   }
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-950 p-4">
       <div className="w-full overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6">
         <h1 className="py-4 text-center text-2xl font-bold text-gray-200">
           Pick a Repository
@@ -37,10 +41,10 @@ const PickRepoList = () => {
             <h2 className="w-full text-left text-lg text-gray-200">
               {repo.name}
             </h2>
-            <p className="text-md w-full pb-4 text-left italic">
+            <p className="text-md w-full pb-4 text-left italic text-gray-400">
               {repo.description}
             </p>
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between text-gray-400">
               <div className="flex items-center">
                 <div
                   className="h-3 w-3 rounded-full"

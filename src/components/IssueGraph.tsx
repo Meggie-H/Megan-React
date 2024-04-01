@@ -5,11 +5,12 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
 import { RouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const OpenIssueQuery = useQuery({
     queryKey: [`getOpenIssueCount`, username, repo],
@@ -34,16 +35,37 @@ const IssueGraph = () => {
     ],
   };
 
-  const options = {
+  const chartOptions = {
     scales: {
+      x: {
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          color: '#edf2f7',
+        },
+      },
       y: {
         beginAtZero: true,
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          color: '#edf2f7',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7',
+        },
       },
     },
   };
 
   if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
-    return <div>Loading...</div>;
+    <StatsSkeleton />;
   }
 
   if (OpenIssueQuery.isError || ClosedIssueQuery.isError) {
@@ -52,8 +74,8 @@ const IssueGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-full">Issues</h2>
-      <Bar data={data} options={options} />
+      <h2 className="text-gray-200">Issues</h2>
+      <Bar data={data} options={chartOptions} />
     </div>
   );
 };

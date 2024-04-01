@@ -4,9 +4,10 @@ import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
 import { IContributor, RouteParams } from '../models';
 import { PolarArea } from 'react-chartjs-2';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const CommitGraph = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const ContributorQuery = useQuery({
     queryKey: [`getContributors`, username, repo],
@@ -35,12 +36,25 @@ const CommitGraph = () => {
           'rgba(75, 192, 192, 0.6)',
           'rgba(153, 102, 255, 0.6)',
         ],
+        borderColor: 'transparent',
       },
     ],
   };
 
+  const chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7',
+        },
+      },
+    },
+  };
+
   if (ContributorQuery.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      StatsSkeleton
+    );
   }
 
   if (ContributorQuery.isError) {
@@ -48,8 +62,11 @@ const CommitGraph = () => {
   }
 
   return (
-    <div className="rounded-lg bg-gray-900 p-4">
-      <PolarArea data={chartData} />
+    <div className="flex h-full flex-col items-center rounded-2xl bg-gray-900 p-4">
+      <h2 className="text-gray-200">Commits</h2>
+      <div className="flex h-full w-full justify-center">
+        <PolarArea data={chartData} options={chartOptions} />
+      </div>
     </div>
   );
 };

@@ -6,8 +6,8 @@ import { useParams } from '@tanstack/react-router';
 import { RouteParams } from '../models';
 
 function GitTable() {
-  const {username, repo} : RouteParams = useParams({ strict: false });
-  
+  const { username, repo }: RouteParams = useParams({ strict: false });
+
   const {
     data: commitData,
     isLoading,
@@ -18,7 +18,11 @@ function GitTable() {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex h-screen w-screen flex-col items-center rounded-2xl bg-gray-950 p-4">
+        <div className="skeleton h-full w-full bg-gray-900 md:w-5/6"></div>
+      </div>
+    );
   }
 
   if (isError) {
@@ -38,7 +42,7 @@ function GitTable() {
               <div className="align-center flex">
                 <img
                   src={commit.author?.avatar_url}
-                  alt="Avatar"
+                  alt={`${commit.author?.login ?? "User"} profile picture`}
                   className="mr-2 h-6 w-6 rounded-full"
                 />
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
@@ -56,7 +60,7 @@ function GitTable() {
           </div>
         ))}
       </div>
-      <div className="hidden overflow-hidden rounded-lg border border-gray-600 text-gray-300 md:w-5/6 lg:block">
+      <div className="hidden overflow-hidden rounded-lg border border-gray-600 text-gray-300  md:w-5/6 lg:block">
         <table className="w-full gap-4">
           <thead className="w-full bg-gray-900 ">
             <tr className="column border border-gray-600 ">

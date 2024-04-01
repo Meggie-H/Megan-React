@@ -6,8 +6,8 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { RouteParams } from '../models';
 
 const Navbar = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
-  
+  const { username, repo }: RouteParams = useParams({ strict: false });
+
   return (
     <div className="w-screen border-b border-gray-600 bg-black px-4 pb-0 text-gray-400">
       <div className="breadcrumbs text-lg">
@@ -17,6 +17,7 @@ const Navbar = () => {
               <img
                 className="h-8 w-8"
                 src="https://assets-global.website-files.com/61d1b6e84887f53fef1dcdf2/631b45e07d98cfb364e5951f_github-white.png"
+                alt="GitHub Logo"
               />
             </Link>
           </li>

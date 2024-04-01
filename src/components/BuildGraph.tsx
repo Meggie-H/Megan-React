@@ -4,9 +4,10 @@ import { getBuildStats } from '../services/StatsAPI';
 import { useQuery } from '@tanstack/react-query';
 import { Doughnut } from 'react-chartjs-2';
 import { RouteParams } from '../models';
+import { StatsSkeleton } from './StatsSkeleton';
 
 const BuildGraph = () => {
-  const {username, repo} : RouteParams = useParams({ strict: false });
+  const { username, repo }: RouteParams = useParams({ strict: false });
 
   const BuildStatsQuery = useQuery({
     queryKey: [`getBuildStats`, username, repo],
@@ -24,13 +25,24 @@ const BuildGraph = () => {
         ],
         backgroundColor: ['red', 'green'],
         borderColor: 'transparent',
-        borderWidth: 1,
       },
     ],
   };
 
+  const chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          color: '#edf2f7',
+        },
+      },
+    },
+  };
+
   if (BuildStatsQuery.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <StatsSkeleton />
+    );
   }
 
   if (BuildStatsQuery.isError) {
@@ -39,8 +51,8 @@ const BuildGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-full">Builds</h2>
-      <Doughnut data={data} />
+      <h2 className="text-gray-200">Builds</h2>
+      <Doughnut data={data} options={chartOptions} />
     </div>
   );
 };
