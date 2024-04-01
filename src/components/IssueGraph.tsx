@@ -75,7 +75,7 @@ const IssueGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-ful text-gray-200">Issues</h2>
+      <h2 className="text-gray-200">Issues</h2>
       <Bar data={data} options={chartOptions} />
     </div>
   );

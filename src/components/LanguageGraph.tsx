@@ -47,7 +47,7 @@ const LanguageGraph = () => {
 
   return (
     <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
-      <h2 className="width-full text-gray-200">Languages</h2>
+      <h2 className="text-gray-200">Languages</h2>
       <Doughnut data={data} options={chartOptions} />
     </div>
   );
