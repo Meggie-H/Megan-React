@@ -65,7 +65,7 @@ export const CommitGraph = () => {
   return (
     <div className="flex h-full flex-col items-center border border-gray-800 p-4">
       <h2 className="text-gray-200">Commits</h2>
-      <div className="flex h-full w-full justify-center">
+      <div className="flex h-full justify-center">
         <PolarArea data={chartData} options={chartOptions} />
       </div>
     </div>
