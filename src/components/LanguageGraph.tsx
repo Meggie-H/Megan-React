@@ -8,17 +8,21 @@ import { StatsSkeleton } from './StatsSkeleton';
 export const LanguageGraph = () => {
   const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const LanguagesStatsQuery = useQuery({
+  const {
+    data: loadingData,
+    isError,
+    isLoading,
+  } = useQuery({
     queryKey: [`getLanguageStats`, username, repo],
     queryFn: () => getLanguageStats(username, repo),
   });
 
   const data = {
-    labels: LanguagesStatsQuery.data?.languages,
+    labels: loadingData?.languages,
     datasets: [
       {
-        data: LanguagesStatsQuery.data?.percentages,
-        backgroundColor: LanguagesStatsQuery.data?.colors,
+        data: loadingData?.percentages,
+        backgroundColor: loadingData?.colors,
         borderColor: 'transparent',
         borderWidth: 1,
       },
@@ -35,11 +39,11 @@ export const LanguageGraph = () => {
     },
   };
 
-  if (LanguagesStatsQuery.isLoading) {
+  if (isLoading) {
     <StatsSkeleton />;
   }
 
-  if (LanguagesStatsQuery.isError) {
+  if (isError) {
     return <div>Error fetching language data</div>;
   }
 

@@ -8,7 +8,11 @@ import { StatsSkeleton } from './StatsSkeleton';
 export const BuildGraph = () => {
   const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const BuildStatsQuery = useQuery({
+  const {
+    data: buildData,
+    isLoading: buildLoading,
+    isError: buildError,
+  } = useQuery({
     queryKey: [`getBuildStats`, username, repo],
     queryFn: () => getBuildStats(username, repo),
   });
@@ -18,10 +22,7 @@ export const BuildGraph = () => {
     datasets: [
       {
         label: 'Builds',
-        data: [
-          BuildStatsQuery.data?.failures ?? 0,
-          BuildStatsQuery.data?.successes ?? 0,
-        ],
+        data: [buildData?.failures ?? 0, buildData?.successes ?? 0],
         backgroundColor: ['#800020', '#228B22'],
         borderColor: 'transparent',
       },
@@ -38,11 +39,11 @@ export const BuildGraph = () => {
     },
   };
 
-  if (BuildStatsQuery.isLoading) {
+  if (buildLoading) {
     return <StatsSkeleton />;
   }
 
-  if (BuildStatsQuery.isError) {
+  if (buildError) {
     return <div>Error fetching build data</div>;
   }
 

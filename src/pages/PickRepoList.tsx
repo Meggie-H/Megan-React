@@ -8,12 +8,16 @@ import { IRouteParams } from '../models';
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
   const { username }: IRouteParams = useParams({ strict: false });
-  const RepoQuery = useQuery({
+  const {
+    data: repoData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
   });
 
-  if (RepoQuery.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
         <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
@@ -21,7 +25,7 @@ const PickRepoList = () => {
     );
   }
 
-  if (RepoQuery.isError) {
+  if (isError) {
     return <div>Error fetching commit data</div>;
   }
 
@@ -31,7 +35,7 @@ const PickRepoList = () => {
         <h1 className="py-4 text-center text-2xl font-bold text-gray-200">
           Pick a Repository
         </h1>
-        {RepoQuery.data?.map((repo) => (
+        {repoData?.map((repo) => (
           <Link
             to={`/${username}/${repo.name}/dashboard/stats`}
             key={repo.id}

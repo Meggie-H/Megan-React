@@ -1,14 +1,6 @@
 import { createLazyFileRoute } from '@tanstack/react-router';
-import UserForm from '../components/UserForm';
+import { LoginPage } from '../pages/LoginPage';
 
 export const Route = createLazyFileRoute('/')({
-  component: Index,
+  component: LoginPage,
 });
-
-function Index() {
-  return (
-    <div className="flex h-screen w-screen items-center justify-center">
-      <UserForm />
-    </div>
-  );
-}

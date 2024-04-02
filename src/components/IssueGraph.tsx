@@ -11,12 +11,20 @@ export const IssueGraph = () => {
 
   const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const OpenIssueQuery = useQuery({
+  const {
+    data: openIssueData,
+    isLoading: openLoading,
+    isError: openError,
+  } = useQuery({
     queryKey: [`getOpenIssueCount`, username, repo],
     queryFn: () => getOpenIssueCount(username, repo),
   });
 
-  const ClosedIssueQuery = useQuery({
+  const {
+    data: closedIssueData,
+    isLoading: closedLoading,
+    isError: closedError,
+  } = useQuery({
     queryKey: [`getCompletedIssueCount`, username, repo],
     queryFn: () => getClosedIssueCount(username, repo),
   });
@@ -26,7 +34,7 @@ export const IssueGraph = () => {
     datasets: [
       {
         label: 'Issues',
-        data: [OpenIssueQuery.data, ClosedIssueQuery.data],
+        data: [openIssueData, closedIssueData],
         backgroundColor: ['#33A0BF', '#4B0082'],
         borderColor: 'transparent',
         borderWidth: 1,
@@ -44,11 +52,11 @@ export const IssueGraph = () => {
     },
   };
 
-  if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
+  if (openLoading || closedLoading) {
     <StatsSkeleton />;
   }
 
-  if (OpenIssueQuery.isError || ClosedIssueQuery.isError) {
+  if (openError || closedError) {
     return <div>Error fetching issue data</div>;
   }
 

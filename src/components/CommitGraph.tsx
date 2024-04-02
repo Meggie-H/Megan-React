@@ -8,17 +8,20 @@ import { StatsSkeleton } from './StatsSkeleton';
 export const CommitGraph = () => {
   const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const ContributorQuery = useQuery({
+  const {
+    data: contributorsData,
+    isLoading: contributorsLoading,
+    isError: contributorsError,
+  } = useQuery({
     queryKey: [`getContributors`, username, repo],
     queryFn: () => getContributors(username, repo),
   });
 
   const contributorNames: string[] =
-    ContributorQuery.data?.map(
-      (contributor: IContributor) => contributor.name,
-    ) ?? [];
+    contributorsData?.map((contributor: IContributor) => contributor.name) ??
+    [];
   const contributions: number[] =
-    ContributorQuery.data?.map(
+    contributorsData?.map(
       (contributor: IContributor) => contributor.contributions,
     ) ?? [];
 
@@ -52,11 +55,11 @@ export const CommitGraph = () => {
     },
   };
 
-  if (ContributorQuery.isLoading) {
+  if (contributorsLoading) {
     return <StatsSkeleton />;
   }
 
-  if (ContributorQuery.isError) {
+  if (contributorsError) {
     return <div>Error fetching commit data</div>;
   }
 

@@ -7,7 +7,7 @@ import { LanguageGraph } from '../components';
 const StatsPage = () => {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="m-2 my-0 w-11/12 border-b border-t border-gray-900 md:m-12">
+      <div className="mx-2 w-11/12 border-b border-t border-gray-900 md:mx-12">
         <Contributors />
       </div>
       <div className="m-2 flex w-11/12 items-center justify-center md:m-12">
