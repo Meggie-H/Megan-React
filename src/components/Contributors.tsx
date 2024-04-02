@@ -1,18 +1,21 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { getContributors } from '../services/StatsAPI';
-import { IContributor, RouteParams } from '../models';
+import { IContributor, IRouteParams } from '../models';
 
-const Contributors = () => {
-  const { username, repo }: RouteParams = useParams({ strict: false });
+export const Contributors = () => {
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const ContributorQuery = useQuery({
+  const {
+    data: contributorsData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [`getContributors`, username, repo],
     queryFn: () => getContributors(username, repo),
   });
 
-  if (ContributorQuery.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex h-48 w-screen flex-col items-center rounded-2xl bg-gray-950 p-4">
         <div className="skeleton h-full w-full bg-gray-800"></div>
@@ -20,14 +23,14 @@ const Contributors = () => {
     );
   }
 
-  if (ContributorQuery.isError) {
+  if (isError) {
     return <div>Error fetching commit data</div>;
   }
 
   return (
     <div className="bg-gray-950">
       <div className="justify-left flex flex-wrap">
-        {ContributorQuery.data?.map((contributor: IContributor) => (
+        {contributorsData?.map((contributor: IContributor) => (
           <div
             key={contributor.name}
             className="m-2 flex items-center gap-2 rounded-2xl bg-gray-900 p-4 md:m-4 md:flex-col"
@@ -35,7 +38,7 @@ const Contributors = () => {
             <img
               src={contributor.avatar}
               alt={`${contributor.name} profile picture`}
-              className="h-4 w-4 rounded-full md:h-24 md:w-24"
+              className="h-6 w-6 rounded-full md:h-24 md:w-24"
             />
             <p className="text-sm text-white ">{contributor.name}</p>
           </div>
@@ -44,5 +47,3 @@ const Contributors = () => {
     </div>
   );
 };
-
-export default Contributors;

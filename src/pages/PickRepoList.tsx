@@ -1,20 +1,23 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getRepos } from '../services/RepositoriesAPI';
 import languageColors from '../json/languageColors.json';
 import { ILanguageColors } from '../models';
 import { Link, useParams } from '@tanstack/react-router';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 
 const PickRepoList = () => {
   const languageColorsData: ILanguageColors = languageColors;
-  const { username }: RouteParams = useParams({ strict: false });
-  const RepoQuery = useQuery({
+  const { username }: IRouteParams = useParams({ strict: false });
+  const {
+    data: repoData,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [`getRepos`, username],
     queryFn: () => getRepos(username),
   });
 
-  if (RepoQuery.isLoading) {
+  if (isLoading) {
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center bg-gray-950 p-4">
         <div className="skeleton h-full w-full bg-gray-800 md:w-4/6"></div>
@@ -22,7 +25,7 @@ const PickRepoList = () => {
     );
   }
 
-  if (RepoQuery.isError) {
+  if (isError) {
     return <div>Error fetching commit data</div>;
   }
 
@@ -32,9 +35,9 @@ const PickRepoList = () => {
         <h1 className="py-4 text-center text-2xl font-bold text-gray-200">
           Pick a Repository
         </h1>
-        {RepoQuery.data?.map((repo) => (
+        {repoData?.map((repo) => (
           <Link
-            to={`/${username}/${repo.name}/dashboard`}
+            to={`/${username}/${repo.name}/dashboard/stats`}
             key={repo.id}
             className="flex w-full transform flex-col items-center border-b border-t border-gray-800 bg-gray-950 p-4 transition-transform duration-300 hover:scale-[1.01] hover:cursor-pointer hover:bg-gray-800"
           >

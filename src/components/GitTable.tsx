@@ -1,12 +1,11 @@
-import React from 'react';
 import { getCommits } from '../services/CommitsAPI';
 import { useQuery } from '@tanstack/react-query';
 import ReadMore from './ReadMore';
 import { useParams } from '@tanstack/react-router';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 
-function GitTable() {
-  const { username, repo }: RouteParams = useParams({ strict: false });
+export function GitTable() {
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
   const {
     data: commitData,
@@ -32,7 +31,7 @@ function GitTable() {
   return (
     <>
       <div className="m-4 block overflow-hidden rounded-lg border border-gray-600 bg-gray-900 md:w-4/6 lg:hidden">
-        <h2 className="w-full py-4 text-center">Commit data</h2>
+        <h2 className="py-4 text-center">Commit data</h2>
         {commitData?.map((commit) => (
           <div
             key={commit.id}
@@ -42,16 +41,16 @@ function GitTable() {
               <div className="align-center flex">
                 <img
                   src={commit.author?.avatar_url}
-                  alt={`${commit.author?.login ?? "User"} profile picture`}
+                  alt={`${commit.author?.login ?? 'User'} profile picture`}
                   className="mr-2 h-6 w-6 rounded-full"
                 />
                 <p>{commit.author?.login ? commit.author.login : 'Unknown'}</p>
               </div>
               <div className="flex gap-2">
-                <div className="badge badge-primary badge-outline">
+                <div className="badge badge-primary badge-outline text-xs md:text-sm">
                   {commit.date}
                 </div>
-                <div className="badge badge-secondary badge-outline">
+                <div className="badge badge-secondary badge-outline text-xs md:text-sm">
                   {commit.id}
                 </div>
               </div>
@@ -98,5 +97,3 @@ function GitTable() {
     </>
   );
 }
-
-export default GitTable;

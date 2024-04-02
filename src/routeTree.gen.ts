@@ -13,11 +13,12 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as UsernameReposImport } from './routes/$username.Repos'
-import { Route as UsernameRepoDashboardImport } from './routes/$username.$repo.Dashboard'
-import { Route as UsernameRepoDashboardStatsImport } from './routes/$username.$repo.dashboard.stats'
-import { Route as UsernameRepoDashboardGitTreeImport } from './routes/$username.$repo.dashboard.git-tree'
-import { Route as UsernameRepoDashboardCommitsImport } from './routes/$username.$repo.dashboard.commits'
+import { Route as AuthenticatedImport } from './routes/_authenticated'
+import { Route as AuthenticatedUsernameReposImport } from './routes/_authenticated/$username.repos'
+import { Route as AuthenticatedUsernameRepoDashboardImport } from './routes/_authenticated/$username.$repo.dashboard'
+import { Route as AuthenticatedUsernameRepoDashboardStatsImport } from './routes/_authenticated/$username.$repo.dashboard.stats'
+import { Route as AuthenticatedUsernameRepoDashboardGitTreeImport } from './routes/_authenticated/$username.$repo.dashboard.git-tree'
+import { Route as AuthenticatedUsernameRepoDashboardCommitsImport } from './routes/_authenticated/$username.$repo.dashboard.commits'
 
 // Create Virtual Routes
 
@@ -25,38 +26,45 @@ const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const UsernameReposRoute = UsernameReposImport.update({
-  path: '/$username/Repos',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const UsernameRepoDashboardRoute = UsernameRepoDashboardImport.update({
-  path: '/$username/$repo/Dashboard',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const UsernameRepoDashboardStatsRoute = UsernameRepoDashboardStatsImport.update(
+const AuthenticatedUsernameReposRoute = AuthenticatedUsernameReposImport.update(
   {
-    path: '/$username/$repo/dashboard/stats',
-    getParentRoute: () => rootRoute,
+    path: '/$username/repos',
+    getParentRoute: () => AuthenticatedRoute,
   } as any,
 )
 
-const UsernameRepoDashboardGitTreeRoute =
-  UsernameRepoDashboardGitTreeImport.update({
-    path: '/$username/$repo/dashboard/git-tree',
-    getParentRoute: () => rootRoute,
+const AuthenticatedUsernameRepoDashboardRoute =
+  AuthenticatedUsernameRepoDashboardImport.update({
+    path: '/$username/$repo/dashboard',
+    getParentRoute: () => AuthenticatedRoute,
   } as any)
 
-const UsernameRepoDashboardCommitsRoute =
-  UsernameRepoDashboardCommitsImport.update({
-    path: '/$username/$repo/dashboard/commits',
-    getParentRoute: () => rootRoute,
+const AuthenticatedUsernameRepoDashboardStatsRoute =
+  AuthenticatedUsernameRepoDashboardStatsImport.update({
+    path: '/stats',
+    getParentRoute: () => AuthenticatedUsernameRepoDashboardRoute,
+  } as any)
+
+const AuthenticatedUsernameRepoDashboardGitTreeRoute =
+  AuthenticatedUsernameRepoDashboardGitTreeImport.update({
+    path: '/git-tree',
+    getParentRoute: () => AuthenticatedUsernameRepoDashboardRoute,
+  } as any)
+
+const AuthenticatedUsernameRepoDashboardCommitsRoute =
+  AuthenticatedUsernameRepoDashboardCommitsImport.update({
+    path: '/commits',
+    getParentRoute: () => AuthenticatedUsernameRepoDashboardRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -67,25 +75,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/$username/Repos': {
-      preLoaderRoute: typeof UsernameReposImport
+    '/_authenticated': {
+      preLoaderRoute: typeof AuthenticatedImport
       parentRoute: typeof rootRoute
     }
-    '/$username/$repo/Dashboard': {
-      preLoaderRoute: typeof UsernameRepoDashboardImport
-      parentRoute: typeof rootRoute
+    '/_authenticated/$username/repos': {
+      preLoaderRoute: typeof AuthenticatedUsernameReposImport
+      parentRoute: typeof AuthenticatedImport
     }
-    '/$username/$repo/dashboard/commits': {
-      preLoaderRoute: typeof UsernameRepoDashboardCommitsImport
-      parentRoute: typeof rootRoute
+    '/_authenticated/$username/$repo/dashboard': {
+      preLoaderRoute: typeof AuthenticatedUsernameRepoDashboardImport
+      parentRoute: typeof AuthenticatedImport
     }
-    '/$username/$repo/dashboard/git-tree': {
-      preLoaderRoute: typeof UsernameRepoDashboardGitTreeImport
-      parentRoute: typeof rootRoute
+    '/_authenticated/$username/$repo/dashboard/commits': {
+      preLoaderRoute: typeof AuthenticatedUsernameRepoDashboardCommitsImport
+      parentRoute: typeof AuthenticatedUsernameRepoDashboardImport
     }
-    '/$username/$repo/dashboard/stats': {
-      preLoaderRoute: typeof UsernameRepoDashboardStatsImport
-      parentRoute: typeof rootRoute
+    '/_authenticated/$username/$repo/dashboard/git-tree': {
+      preLoaderRoute: typeof AuthenticatedUsernameRepoDashboardGitTreeImport
+      parentRoute: typeof AuthenticatedUsernameRepoDashboardImport
+    }
+    '/_authenticated/$username/$repo/dashboard/stats': {
+      preLoaderRoute: typeof AuthenticatedUsernameRepoDashboardStatsImport
+      parentRoute: typeof AuthenticatedUsernameRepoDashboardImport
     }
   }
 }
@@ -94,11 +106,14 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexLazyRoute,
-  UsernameReposRoute,
-  UsernameRepoDashboardRoute,
-  UsernameRepoDashboardCommitsRoute,
-  UsernameRepoDashboardGitTreeRoute,
-  UsernameRepoDashboardStatsRoute,
+  AuthenticatedRoute.addChildren([
+    AuthenticatedUsernameReposRoute,
+    AuthenticatedUsernameRepoDashboardRoute.addChildren([
+      AuthenticatedUsernameRepoDashboardCommitsRoute,
+      AuthenticatedUsernameRepoDashboardGitTreeRoute,
+      AuthenticatedUsernameRepoDashboardStatsRoute,
+    ]),
+  ]),
 ])
 
 /* prettier-ignore-end */

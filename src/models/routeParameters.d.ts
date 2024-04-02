@@ -1,4 +1,4 @@
-export interface RouteParams {
+export interface IRouteParams {
   username: string;
   repo: string;
 }

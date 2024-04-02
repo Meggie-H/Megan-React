@@ -8,7 +8,7 @@ import {
   ILanguageColors,
   ILanguageResponse,
   IWorkflowRuns,
-  WorkflowRun,
+  IWorkflowRun,
 } from '../models';
 import languageColors from '../json/languageColors.json';
 
@@ -60,7 +60,7 @@ export async function getBuildStats(
 
   const initialBuildStats: IBuildStats = { successes: 0, failures: 0 };
   const buildStats = data.workflow_runs.reduce(
-    (acc: IBuildStats, build: WorkflowRun) => {
+    (acc: IBuildStats, build: IWorkflowRun) => {
       if (build.conclusion?.includes('success')) {
         acc.successes++;
       } else {

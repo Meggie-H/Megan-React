@@ -1,11 +1,10 @@
-import React from 'react';
 import { useState } from 'react';
 
 interface ReadMoreProps {
   children: string;
 }
 
-const ReadMore = ({ children }: ReadMoreProps) => {
+export const ReadMore = ({ children }: ReadMoreProps) => {
   const text = children;
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {

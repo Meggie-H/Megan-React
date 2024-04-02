@@ -1,23 +1,30 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js/auto';
-import { Bar } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import { getClosedIssueCount, getOpenIssueCount } from '../services/StatsAPI';
-import { RouteParams } from '../models';
+import { IRouteParams } from '../models';
 import { StatsSkeleton } from './StatsSkeleton';
 
-const IssueGraph = () => {
+export const IssueGraph = () => {
   ChartJS.register(ArcElement, Tooltip, Legend);
 
-  const { username, repo }: RouteParams = useParams({ strict: false });
+  const { username, repo }: IRouteParams = useParams({ strict: false });
 
-  const OpenIssueQuery = useQuery({
+  const {
+    data: openIssueData,
+    isLoading: openLoading,
+    isError: openError,
+  } = useQuery({
     queryKey: [`getOpenIssueCount`, username, repo],
     queryFn: () => getOpenIssueCount(username, repo),
   });
 
-  const ClosedIssueQuery = useQuery({
+  const {
+    data: closedIssueData,
+    isLoading: closedLoading,
+    isError: closedError,
+  } = useQuery({
     queryKey: [`getCompletedIssueCount`, username, repo],
     queryFn: () => getClosedIssueCount(username, repo),
   });
@@ -27,8 +34,8 @@ const IssueGraph = () => {
     datasets: [
       {
         label: 'Issues',
-        data: [OpenIssueQuery.data, ClosedIssueQuery.data],
-        backgroundColor: ['red', 'green'],
+        data: [openIssueData, closedIssueData],
+        backgroundColor: ['#33A0BF', '#4B0082'],
         borderColor: 'transparent',
         borderWidth: 1,
       },
@@ -36,25 +43,6 @@ const IssueGraph = () => {
   };
 
   const chartOptions = {
-    scales: {
-      x: {
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          color: '#edf2f7',
-        },
-      },
-      y: {
-        beginAtZero: true,
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
-        },
-        ticks: {
-          color: '#edf2f7',
-        },
-      },
-    },
     plugins: {
       legend: {
         labels: {
@@ -64,20 +52,18 @@ const IssueGraph = () => {
     },
   };
 
-  if (OpenIssueQuery.isLoading || ClosedIssueQuery.isLoading) {
+  if (openLoading || closedLoading) {
     <StatsSkeleton />;
   }
 
-  if (OpenIssueQuery.isError || ClosedIssueQuery.isError) {
+  if (openError || closedError) {
     return <div>Error fetching issue data</div>;
   }
 
   return (
-    <div className="flex flex-col items-center rounded-2xl bg-gray-900 p-4">
+    <div className="flex flex-col items-center border border-gray-800 p-4">
       <h2 className="text-gray-200">Issues</h2>
-      <Bar data={data} options={chartOptions} />
+      <Pie data={data} options={chartOptions} />
     </div>
   );
 };
-
-export default IssueGraph;
